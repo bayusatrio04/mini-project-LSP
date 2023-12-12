@@ -27,6 +27,7 @@ Route::get('/users/search', [HomeController::class, 'search'])->name('users.sear
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PemesananController;
 
 //Untuk Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -42,8 +43,14 @@ Route::prefix('profil')->group(function () {
     // Semua rute dalam grup ini akan memiliki awalan 'admin'
     Route::get('/', [CustomerController::class, 'profil'])->name('profil');
     Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
+});
 
-    // Dan seterusnya...
+Route::prefix('pemesanan')->group(function () {
+    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+    Route::get('{id}', [PemesananController::class, 'index'])->name('pemesanan');
+    Route::post('beli_tiket/{id}', [PemesananController::class, 'beli_tiket'])->name('pemesanan.beli_tiket');
+
+    // Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
 });
 
 

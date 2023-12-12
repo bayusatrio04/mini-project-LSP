@@ -58,7 +58,8 @@
                                 Habis
                                 </button>
                                 @else
-                                <a href="#" class="btn btn-primary w-100">Pesan Tiket</a>
+                                <a href="{{ route('pemesanan', $item->id) }}" class="btn btn-primary w-100">Pesan
+                                    Tiket</a>
                                 @endif
 
 
