@@ -14,17 +14,7 @@
 </head>
 
 <body class="bg-light">
-    @if(session('success'))
-    <script>
-        alert("{{ session('success') }}");
-    </script>
-    @endif
 
-    @if(session('error'))
-    <script>
-        alert("{{ session('error') }}");
-    </script>
-    @endif
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand container mx-auto " href="{{ route('home') }}">
@@ -63,15 +53,14 @@
                         </li>
                         @endif
 
+
+                        @if ($user_login->isAdmin == 0)
                         <li>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="{{ route('profil') }}">
                                 Profil
                             </a>
                         </li>
-
-
-
-
+                        @endif
 
                         <li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">

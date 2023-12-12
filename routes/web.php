@@ -26,6 +26,7 @@ Route::get('/users/search', [HomeController::class, 'search'])->name('users.sear
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CustomerController;
 
 //Untuk Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -35,6 +36,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 //Untuk Register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'create'])->name('create.account');
+
+//profil customer
+Route::prefix('profil')->group(function () {
+    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+    Route::get('/', [CustomerController::class, 'profil'])->name('profil');
+    Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
+
+    // Dan seterusnya...
+});
 
 
 
@@ -51,7 +61,7 @@ Route::middleware(['web', 'admin'])->group(function () {
     // web.php
 
     Route::get('admin/events', [EventController::class, 'index'])->name('admin.events');
-    Route::get('admin/events/create', [EventController::class, 'create'])->name('events.create'); 
+    Route::get('admin/events/create', [EventController::class, 'create'])->name('events.create');
 
     Route::post('admin/events', [EventController::class, 'store'])->name('events.store');
 
