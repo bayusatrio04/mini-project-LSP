@@ -123,9 +123,27 @@ class PemesananController extends Controller
     public function pembayaran()
     {
 
+        $transaksiBelumBayar = Transaction::get_transaksi_belum_bayar();
+
+        // Update status pembayaran jika sudah melebihi satu hari
+        foreach ($transaksiBelumBayar as $transaksi) {
+            $tanggalPembayaran = Carbon::parse($transaksi->created_at);
+            $sekarang = Carbon::now();
+
+            // Periksa apakah sudah melebihi satu hari
+            if ($tanggalPembayaran->diffInDays($sekarang) >= 1) {
+                // Update status pembayaran menjadi dibatalkan atau sesuai kebutuhan
+                $transaksi->update(['status_transaction' => 2]);
+
+                $event = Event::find($transaksi->id_event);
+                $event->update(['total_tickets' => $event->total_tickets + $transaksi->qty]);
+            }
+        }
+
+        // Mendapatkan data untuk ditampilkan di view
         $data = [
             'user_login' => get_user_login(),
-            'transaksi' => Transaction::get_transaksi_belum_bayar()
+            'transaksi' => $transaksiBelumBayar
         ];
 
 

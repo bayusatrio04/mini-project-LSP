@@ -14,7 +14,7 @@ return new class extends Migration
     {
         // Add a column 'update_done' to events table
         Schema::table('events', function (Blueprint $table) {
-            $table->boolean('update_done')->default(false);
+            $table->integer('update_done')->default(0);
         });
 
         // Create or replace the scheduled event to run every 1 second
@@ -36,8 +36,8 @@ return new class extends Migration
                     FROM transactions 
                     WHERE id_event = events.id
                 ),
-                update_done = true
-                WHERE update_done = false;
+                update_done = 1
+                WHERE update_done = 0;
               END
         ');
     }
