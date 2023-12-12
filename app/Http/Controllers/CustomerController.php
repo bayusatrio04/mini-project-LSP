@@ -78,13 +78,14 @@ class CustomerController extends Controller
         $user->update($attributes);
 
         return redirect('profil')->with('success', 'Profil berhasil diperbarui.');
+    }
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-class CustomerController extends Controller
-{
+    // use Illuminate\Http\Request;
+    // use App\Models\User;
+    // use Illuminate\Support\Facades\Hash;
+    // use Illuminate\Support\Facades\Storage;
+    // class CustomerController extends Controller
+
 
     public function create()
     {
@@ -169,6 +170,5 @@ class CustomerController extends Controller
         $user->delete();
 
         return redirect()->route('admin.customers')->with('success', 'Customer deleted successfully');
-
     }
 }
