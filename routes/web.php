@@ -51,7 +51,7 @@ Route::middleware(['web', 'admin'])->group(function () {
     // web.php
 
     Route::get('admin/events', [EventController::class, 'index'])->name('admin.events');
-    Route::get('admin/events/create', [EventController::class, 'create'])->name('events.create'); // Rute untuk tampilan pembuatan acara
+    Route::get('admin/events/create', [EventController::class, 'create'])->name('events.create'); 
 
     Route::post('admin/events', [EventController::class, 'store'])->name('events.store');
 

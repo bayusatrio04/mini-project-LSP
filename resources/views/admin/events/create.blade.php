@@ -15,12 +15,20 @@
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
 
-
-        <textarea name="description" id="editor" class="form-control"  rows="4" cols="50" required></textarea>
+        {{-- <textarea name="description" id="editor" class="form-control"  rows="4" cols="50" required></textarea> --}}
 
     </div>
-
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select class="form-select" name="category" aria-label="Default select example">
+            <option selected>Open this Categories</option>
+            <option value="Events">Events</option>
+            <option value="Events">Concert</option>
+           
+          </select>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <div class="mb-3">
