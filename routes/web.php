@@ -50,7 +50,22 @@ Route::prefix('pemesanan')->group(function () {
     Route::get('{id}', [PemesananController::class, 'index'])->name('pemesanan');
     Route::post('beli_tiket/{id}', [PemesananController::class, 'beli_tiket'])->name('pemesanan.beli_tiket');
 
+    Route::get('batal/{id}', [PemesananController::class, 'batal'])->name('pemesanan.batal');
+
     // Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
+});
+
+Route::prefix('pembayaran')->group(function () {
+    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+    Route::get('/', [PemesananController::class, 'pembayaran'])->name('pembayaran');
+    Route::post('bayar_tiket', [PemesananController::class, 'bayar_tiket'])->name('pembayaran.bayar_tiket');
+    Route::get('refund/{id}', [PemesananController::class, 'refund'])->name('pembayaran.refund');
+});
+
+Route::prefix('riwayat_transaksi')->group(function () {
+    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+    Route::get('/', [PemesananController::class, 'riwayat_transaksi'])->name('riwayat_transaksi');
+    // Route::post('bayar_tiket', [PemesananController::class, 'bayar_tiket'])->name('pembayaran.bayar_tiket');
 });
 
 

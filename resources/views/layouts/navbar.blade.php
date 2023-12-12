@@ -7,6 +7,9 @@
                 <img src="{{ asset('assets/images/Eventku Logo.png') }}" class="offset-md-1" width="70" height="70">
             </a>
 
+            @php
+            $value = request()->segment(1);
+            @endphp
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -16,8 +19,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link @if (!isset($value)) active @endif" href="{{ route('home') }}">Home</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @if ($value == 'pembayaran') active @endif"
+                            href="{{ route('pembayaran') }}">Pembayaran</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @if ($value == 'riwayat_transaksi') active @endif"
+                            href="{{ route('riwayat_transaksi') }}">Riwayat Transaksi</a>
+                    </li>
+
 
                 </ul>
 

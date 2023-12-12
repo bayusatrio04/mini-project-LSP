@@ -73,3 +73,51 @@ function format_time($time)
 
     return $formattedTime;
 }
+
+function sisa_waktu_bayar($dueDate)
+{
+
+
+
+    // Konversi string ke objek DateTime
+    $dueDateTime = new DateTime($dueDate);
+
+    // Menambahkan 1 hari ke waktu pembayaran
+    $dueDateTime->add(new DateInterval('P1D'));
+
+    // Waktu sekarang
+    $currentDateTime = new DateTime();
+
+    // Hitung selisih waktu
+    $timeDiff = date_diff($currentDateTime, $dueDateTime);
+
+    // Ambil sisa waktu dalam format yang diinginkan
+    $remainingTime = $timeDiff->format('%R%a hari, %h jam, %i menit, %s detik');
+
+    // Tampilkan sisa waktu
+    return $remainingTime;
+}
+
+function status_transaksi($status)
+{
+
+
+    $hasil = "";
+
+
+    if ($status == 0) {
+        $hasil = "<span class='badge bg-secondary'>Belum bayar</span>";
+    } elseif ($status == 1) {
+        $hasil = "<span class='badge bg-warning'>Sudah bayar, menunggu konfirmasi admin</span>";
+    } elseif ($status == 2) {
+        $hasil = "<span class='badge bg-danger'>Batal</span>";
+    } elseif ($status == 3) {
+        $hasil = "<span class='badge bg-success'>Pembayaran diterima</span>";
+    } elseif ($status == 4) {
+        $hasil = "<span class='badge bg-warning'>Sedang proses pengajuan refund</span>";
+    } elseif ($status == 5) {
+        $hasil = "<span class='badge bg-success'>Pengajuan refund berhasil</span>";
+    }
+
+    return $hasil;
+}
