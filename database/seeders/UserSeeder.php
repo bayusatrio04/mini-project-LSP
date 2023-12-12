@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('asdasdasd'),
                 'isAdmin' => 0,
                 'gender' => 1, //0 male 1 female
-                'age' => 22,
+                'ages' => 22,
                 // 'isAdmin' => 0,
 
             ],
@@ -33,15 +33,15 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('asdasdasd'),
                 'isAdmin' => 0,
                 'gender' => 0, //0 male 1 female
-                'age' => 18,
+                'ages' => 18,
             ],
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
-                'password' => Hash::make('asdasdasd'),
+                'password' => Hash::make('admin'),
                 'isAdmin' => 1,
                 'gender' => 1, //0 male 1 female
-                'age' => 21,
+                'ages' => 21,
             ],
         ]);
 

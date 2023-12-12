@@ -231,6 +231,7 @@
                 </div>
             </div>
 
+
             <div class="col-md-12">
                 <section class="bg-white shadow w-100 h-100 rounded">
 
@@ -268,6 +269,7 @@
                         </div>
                     </div>
                 </section>
+
             </div>
 
             @include('event_list.list_event_home')
@@ -281,3 +283,4 @@
 
 
 @endsection
+

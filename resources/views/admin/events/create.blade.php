@@ -22,13 +22,33 @@
     </div>
     <div class="mb-3">
         <label for="category" class="form-label">Category</label>
-        <select class="form-select" name="category" aria-label="Default select example">
-            <option selected>Open this Categories</option>
+        <select class="form-select" name="category" id="category" aria-label="Default select example">
+            <option selected>Choose Categories</option>
             <option value="Events">Events</option>
-            <option value="Events">Concert</option>
-           
-          </select>
+            <option value="Concert">Concert</option>
+        </select>
     </div>
+
+    <div class="mb-3" >
+        <label for="subCategory" class="form-label">Termasuk dalam  <span class="fw-bold">sub Category</span> apa?</label>
+        <select class="form-select" name="subCategory" id="subCategory" aria-label="Default select example">
+            <option selected>Choose subCategories</option>
+            <!-- Subkategori untuk kategori "Events" -->
+            <option value="Event Workshop">Event Workshop</option>
+            <option value="Event Seminar">Event Seminar</option>
+            <option value="Event Conference">Event Conference</option>
+            <option value="Event Exhibition">Event Exhibition</option>
+            <option value="Event Networking ">Event Networking</option>
+            <option value="Concert Rock">Concert Rock</option>
+            <option value="Concert Jazz">Concert Jazz</option>
+            <option value="Concert Pop">Concert Pop</option>
+            <option value="Concert Classical">Concert Classical</option>
+            <option value="Concert EDM">Concert EDM</option>
+        </select>
+    </div>
+
+
+
     <div class="row">
         <div class="col-md-6">
             <div class="mb-3">
