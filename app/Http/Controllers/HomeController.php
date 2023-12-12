@@ -15,13 +15,13 @@ class HomeController extends Controller
     }
     public function search(Request $request)
     {
-    $query = $request->input('query');
+        $query = $request->input('query');
 
-    $users = User::where('name', 'like', "%$query%")
-                 ->orWhere('email', 'like', "%$query%")
-                 ->orWhere('isAdmin', 'like', "%$query%")
-                 ->get();
+        $users = User::where('name', 'like', "%$query%")
+            ->orWhere('email', 'like', "%$query%")
+            ->orWhere('isAdmin', 'like', "%$query%")
+            ->get();
 
-    return view('users.index', compact('users'));
+        return view('users.index', compact('users'));
     }
 }
