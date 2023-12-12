@@ -56,6 +56,7 @@
     <!-- Custom styles for this template -->
     <link href="sidebars.css" rel="stylesheet">
 </head>
+
 <body >
     @if(session('success'))
         <script>alert("{{ session('success') }}");</script>

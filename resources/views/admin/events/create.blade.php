@@ -25,7 +25,7 @@
         <select class="form-select" name="category" aria-label="Default select example">
             <option selected>Open this Categories</option>
             <option value="Events">Events</option>
-            <option value="Events">Concert</option>
+            <option value="Concert">Concert</option>
            
           </select>
     </div>
