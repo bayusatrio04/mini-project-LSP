@@ -9,9 +9,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $users = User::all();
 
-        return view('home', compact('users'));
+        $data = [
+
+            'users' => User::all(),
+            'user_login' => get_user_login()
+        ];
+
+
+        return view('home', $data);
     }
     public function search(Request $request)
     {

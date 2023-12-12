@@ -46,15 +46,33 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Dropdown
+
+
+                        <img src="{{ asset('/')}}storage/{{ $user_login->user_picture }}" alt="" width="50" height="50">
+                        {{ $user_login->name }}
+
                     </a>
                     <ul class="dropdown-menu">
+
+                        @if ($user_login->isAdmin == 1)
                         <li>
                             <a class="dropdown-item btn btn-link text-warning" data-bs-toggle="offcanvas"
                                 href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                                 Dashboard Admin
                             </a>
                         </li>
+                        @endif
+
+                        <li>
+                            <a class="dropdown-item">
+                                Profil
+                            </a>
+                        </li>
+
+
+
+
+
                         <li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
