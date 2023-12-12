@@ -6,7 +6,7 @@
     <title>@yield('title', 'Mini Project 1')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
     <style>
 
 
@@ -102,25 +102,25 @@
                     <ul class="nav nav-pills flex-column mb-auto">
 
                     <li>
-                        <a href="{{ route('admin.dashboards') }}" class="nav-link active bg-warning">
+                        <a href="{{ route('admin.dashboards') }}" class="nav-link {{ request()->is('admin/dashboard') ? ' active bg-warning' : '' }}">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                         Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.orders') }}" class="nav-link link-body-emphasis">
+                        <a href="{{ route('admin.orders') }}" class="nav-link {{ request()->is('admin/orders') ? ' active bg-warning' : '' }} link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                         Orders
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.products') }}" class="nav-link link-body-emphasis">
+                        <a href="{{ route('admin.events') }}" class="nav-link {{ request()->is('admin/events') ? ' active bg-warning' : '' }} link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                        Products
+                        Events
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.users') }}" class="nav-link link-body-emphasis">
+                        <a href="{{ route('admin.customers') }}" class="nav-link {{ request()->is('admin/customers') ? ' active bg-warning' : '' }} link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
                         Customers
                         </a>
@@ -173,6 +173,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 <script src="sidebars.js"></script>
+<script>
+    ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+</script>
 </body>
 </html>
 

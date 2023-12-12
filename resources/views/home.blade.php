@@ -36,6 +36,9 @@
           <li class="nav-item">
             <a class="nav-link bg-primary text-white p-2 mt-3" href="#">Delete Users</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link bg-warning text-white p-2 mt-3" href="{{ route('admin.dashboards') }}">Dashboard Admin</a>
+          </li>
 
         </ul>
 
@@ -168,7 +171,7 @@
                     <div class="overlay3"></div>
 
                     <div class="card-text-overlay">
-                        <p class="text-center text-white fw-bold">ALL</p>
+                        <p class="text-center text-white fw-bold">ALL CATEGORIES</p>
                     </div>
                     </a>
                 </div>

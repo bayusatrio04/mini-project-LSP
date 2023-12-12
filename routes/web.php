@@ -38,12 +38,27 @@ Route::post('/register', [RegisterController::class, 'create'])->name('create.ac
 
 
 
+
 //Untuk Admin
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 
 Route::middleware(['web', 'admin'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboards'])->name('admin.dashboards');
-    Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
-    Route::get('/products', [AdminController::class, 'products'])->name('admin.products');
-    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboards'])->name('admin.dashboards');
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+
+    // web.php
+
+    Route::get('admin/events', [EventController::class, 'index'])->name('admin.events');
+    Route::get('admin/events/create', [EventController::class, 'create'])->name('events.create'); // Rute untuk tampilan pembuatan acara
+
+    Route::post('admin/events', [EventController::class, 'store'])->name('events.store');
+
+    Route::get('admin/events/{event}', [EventController::class, 'show'])->name('events.show');
+    Route::get('admin/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('admin/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
+
+    Route::get('/admin/cutomers', [AdminController::class, 'customers'])->name('admin.customers');
 });
