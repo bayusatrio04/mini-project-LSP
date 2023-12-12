@@ -9,16 +9,27 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
 
+    <style>
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-profile img {
+            margin-right: 10px;
+            /* Sesuaikan margin sesuai kebutuhan */
+        }
+    </style>
+
     @yield('addStyle')
 
 </head>
 
 <body class="bg-light">
-    @if(session('success'))
-    <script>
-        alert("{{ session('success') }}");
-    </script>
-    @endif
+
+
+    @include('layouts.navbar')
+
 
     @if(session('error'))
     <script>
@@ -78,6 +89,7 @@
             </ul>
         </div>
     </nav>
+
     <div class="container mt-5">
         @yield('content')
     </div>

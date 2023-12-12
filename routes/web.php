@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Untuk Search
 Route::get('/users/search', [HomeController::class, 'search'])->name('users.search');
@@ -26,6 +26,8 @@ Route::get('/users/search', [HomeController::class, 'search'])->name('users.sear
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PemesananController;
 
 //Untuk Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -35,6 +37,21 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 //Untuk Register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'create'])->name('create.account');
+
+//profil customer
+Route::prefix('profil')->group(function () {
+    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+    Route::get('/', [CustomerController::class, 'profil'])->name('profil');
+    Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
+});
+
+Route::prefix('pemesanan')->group(function () {
+    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+    Route::get('{id}', [PemesananController::class, 'index'])->name('pemesanan');
+    Route::post('beli_tiket/{id}', [PemesananController::class, 'beli_tiket'])->name('pemesanan.beli_tiket');
+
+    // Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
+});
 
 
 
@@ -49,6 +66,9 @@ use App\Http\Controllers\CustomerController;
 Route::middleware(['web', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboards'])->name('admin.dashboards');
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+
+
+
 
 
 

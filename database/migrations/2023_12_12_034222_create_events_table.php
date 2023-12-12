@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+
             $table->string('category_events');
             $table->string('subCategory_events');
+
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('location');
