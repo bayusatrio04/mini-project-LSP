@@ -20,7 +20,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Event Details</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Category :</strong> {{ $event->category }}</li>
+                            <li class="list-group-item"><strong>Category :</strong> {{ $event->category_events }}</li>
+                            <li class="list-group-item"><strong>Type Category :</strong> {{ $event->subCategory_events }}</li>
                             <li class="list-group-item"><strong>Start Date:</strong> {{ $event->start_date }}</li>
                             <li class="list-group-item"><strong>End Date:</strong> {{ $event->end_date }}</li>
                             <li class="list-group-item"><strong>Location:</strong> {{ $event->location }}</li>

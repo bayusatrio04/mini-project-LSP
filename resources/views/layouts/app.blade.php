@@ -49,12 +49,14 @@
 
                     </a>
                     <ul class="dropdown-menu">
+                        @if(Auth::user() && Auth::user()->isAdmin)
                         <li>
                             <a class="dropdown-item btn btn-link text-warning" data-bs-toggle="offcanvas"
                                 href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                                 Dashboard Admin
                             </a>
                         </li>
+                        @endif
                         <li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf

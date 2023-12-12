@@ -13,7 +13,8 @@ class Event extends Model
     protected $fillable = [
         'title',
         'description',
-        'category',
+        'category_events',
+        'subCategory_events',
         'start_date',
         'end_date',
         'location',
@@ -21,6 +22,6 @@ class Event extends Model
         'total_tickets',
         'sold_tickets',
         'image_path',
-      
+
     ];
 }

@@ -185,14 +185,14 @@
                         <img src="{{ asset('assets/images/events3.jpg') }}" class="card-img-top" alt="Event 1">
                         <div class="overlay3"></div>
 
-                        <<<<<<< HEAD <div class="card-text-overlay">
+                         <div class="card-text-overlay">
                             <p class="text-center text-white fw-bold">ALL</p>
                 </div>
-                =======
+
                 <div class="card-text-overlay">
                     <p class="text-center text-white fw-bold">ALL CATEGORIES</p>
                 </div>
-                >>>>>>> 0a3002025cffd62e875865a991d99167f7fda36d
+
                 </a>
             </div>
         </div>

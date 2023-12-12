@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+
 use Illuminate\Support\Facades\Storage;
 class EventController extends Controller
 {
@@ -14,6 +15,7 @@ class EventController extends Controller
         return view('admin.events', compact('events'));
     }
     public function create(){
+
         return view('admin.events.create');
     }
     public function store(Request $request)
@@ -23,12 +25,15 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required',
             'category' => 'required',
+            'subCategory' => 'required',
+
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'location' => 'required|string|max:255',
             'ticket_price' => 'required',
             'total_tickets' => 'required',
             'image' => 'required',
+
 
         ]);
 
@@ -38,7 +43,8 @@ class EventController extends Controller
         Event::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'category' => $request->input('category'),
+            'category_events' => $request->input('category'),
+            'subCategory_events' => $request->input('subCategory'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
             'location' => $request->input('location'),
@@ -47,13 +53,13 @@ class EventController extends Controller
             'image_path' => $imagePath,
         ]);
 
-     
+
         return redirect()->route('admin.events')->with('success', 'Event created successfully.');
     }
 
     public function show($id)
     {
-   
+
         $event = Event::findOrFail($id);
         return view('admin.events.show', compact('event'));
     }
@@ -69,7 +75,8 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'category' => 'required|string',
+            'category' => 'required',
+            'subCategory' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'location' => 'required|string|max:255',
@@ -82,27 +89,28 @@ class EventController extends Controller
 
         $event->title = $validatedData['title'];
         $event->description = $validatedData['description'];
-        $event->category = $validatedData['category'];
+        $event->category_events = $validatedData['category'];
+        $event->subCategory_events= $validatedData['subCategory'];
         $event->start_date = $validatedData['start_date'];
         $event->end_date = $validatedData['end_date'];
         $event->location = $validatedData['location'];
         $event->ticket_price = $validatedData['ticket_price'];
         $event->total_tickets = $validatedData['total_tickets'];
 
-      
+
         if ($request->hasFile('image')) {
-         
+
             if ($event->image_path) {
                 Storage::delete($event->image_path);
             }
-    
-      
+
+
             $imagePath = $request->file('image')->store('events', 'public');
-    
-         
+
+
             $event->update(['image_path' => $imagePath]);
         }
-        
+
 
         $event->save();
 
@@ -112,13 +120,13 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
-        
+
         if ($event->image_path) {
-       
+
             Storage::disk('public')->delete($event->image_path);
         }
 
-      
+
         $event->delete();
 
         return redirect()->route('admin.events')->with('success', 'Event has been deleted successfully.');

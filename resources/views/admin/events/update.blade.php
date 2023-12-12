@@ -19,15 +19,36 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="3" required>{{ $event->description }}</textarea>
             </div>
-  
+
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <select class="form-select" name="category" aria-label="Default select example">
-                    <option value="{{ $event->category }} {{ $event->id == $event->category ? 'selected' : '' }}">Before is: {{ $event->category }}</option>
-                    <option value="Events">Change to : Events</option>
+                    <option value="{{ $event->category }} {{ $event->id == $event->category ? 'selected' : '' }}"> {{ $event->category_events }}</option>
+                    @if ($event->category_events == "Events")
                     <option value="Concert">Change to :Concert</option>
-                   
+                    @else
+                    <option value="Events">Change to : Events</option>
+                    @endif
+
                   </select>
+            </div>
+
+            <div class="mb-3" >
+                <label for="subCategory" class="form-label">Termasuk dalam  <span class="fw-bold">sub Category</span> apa?</label>
+                <select class="form-select" name="subCategory" id="subCategory" aria-label="Default select example">
+                    <option value="{{ $event->subCategory_events }} {{ $event->id == $event->subCategory_events ? 'selected' : '' }}"> {{ $event->subCategory_events }}</option>
+                    <!-- Subkategori untuk kategori "Events" -->
+                    <option value="Event Workshop">Change to : Event Workshop</option>
+                    <option value="Event Seminar">Change to : Event Seminar</option>
+                    <option value="Event Conference">Change to : Event Conference</option>
+                    <option value="Event Exhibition">Change to : Event Exhibition</option>
+                    <option value="Event Networking ">Change to : Event Networking</option>
+                    <option value="Concert Rock">Change to : Concert Rock</option>
+                    <option value="Concert Jazz">Change to : Concert Jazz</option>
+                    <option value="Concert Pop">Change to : Concert Pop</option>
+                    <option value="Concert Classical">Change to : Concert Classical</option>
+                    <option value="Concert EDM">Change to : Concert EDM</option>
+                </select>
             </div>
             <div class="row">
                 <div class="col-md-6">
