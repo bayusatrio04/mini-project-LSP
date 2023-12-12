@@ -21,7 +21,7 @@
         <img src="{{ asset('assets/images/Eventku Logo.png') }}" class="offset-md-1" width="70" height="70" alt="" srcset="">
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav" style="right: -100px !important;">
                 @guest
                     <li class="nav-item">
                         <a class="nav-link fw-bold" href="{{ route('login') }}">Sign In</a>
@@ -32,11 +32,11 @@
                 @else
                 @if(Auth::user() && Auth::user()->isAdmin)
                 <li  class="nav-item" >
-
-                </li>
-                    <a class="btn btn-warning text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                        Pages Admin
+                    <a class="btn btn-link nav-link text-warning" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                        Dashboard Admin
                     </a>
+                </li>
+
                 @endif
                     <li class="nav-item">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
