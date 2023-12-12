@@ -10,6 +10,7 @@ class Event extends Model
     use HasFactory;
     protected $table = 'events';
 
+
     protected $guarded = [];
 
 
@@ -36,4 +37,20 @@ class Event extends Model
         return $query->join('event_categories', 'events.id', '=', 'event_categories.id_event')
             ->where('events.title', 'like', '%' . $eventName . '%');
     }
+
+    protected $fillable = [
+        'title',
+        'description',
+        'category_events',
+        'subCategory_events',
+        'start_date',
+        'end_date',
+        'location',
+        'ticket_price',
+        'total_tickets',
+        'sold_tickets',
+        'image_path',
+
+    ];
+
 }

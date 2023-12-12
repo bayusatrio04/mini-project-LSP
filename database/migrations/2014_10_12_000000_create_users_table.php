@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('ages')->nullable();
             $table->string('image_path')->nullable();
             $table->boolean('isAdmin')->default(false);
-            $table->integer('age')->nullable();
+
             $table->text('user_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
