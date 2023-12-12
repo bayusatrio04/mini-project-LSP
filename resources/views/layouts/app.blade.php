@@ -37,58 +37,7 @@
     </script>
     @endif
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand container mx-auto " href="{{ route('home') }}">
-            <img src="{{ asset('assets/images/Eventku Logo.png') }}" class="offset-md-1" width="70" height="70" alt=""
-                srcset="">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" style="right: -100px !important;">
-                @guest
-                <li class="nav-item">
-                    <a class="nav-link fw-bold" href="{{ route('login') }}">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
-                </li>
-                @else
-                {{-- @if(Auth::user() && Auth::user()->isAdmin) --}}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                    </a>
-                    <ul class="dropdown-menu">
-                        @if(Auth::user() && Auth::user()->isAdmin)
-                        <li>
-                            <a class="dropdown-item btn btn-link text-warning" data-bs-toggle="offcanvas"
-                                href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                                Dashboard Admin
-                            </a>
-                        </li>
-                        @endif
-                        <li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item btn btn-link">Logout</button>
-                            </form>
-                        </li>
-                        {{-- <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
-                    </ul>
-                </li>
-
-
-
-                {{-- @endif --}}
-
-                @endguest
-            </ul>
-        </div>
-    </nav>
 
     <div class="container mt-5">
         @yield('content')
