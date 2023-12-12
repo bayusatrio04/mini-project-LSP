@@ -30,6 +30,14 @@
                         <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
                     </li>
                 @else
+                @if(Auth::user() && Auth::user()->isAdmin)
+                <li  class="nav-item" >
+
+                </li>
+                    <a class="btn btn-warning text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                        Pages Admin
+                    </a>
+                @endif
                     <li class="nav-item">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf

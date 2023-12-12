@@ -14,11 +14,7 @@
     alert("{{ session('error') }}");
 </script>
 @endif
-@if(Auth::user() && Auth::user()->isAdmin)
-    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-        Menu Admin
-    </a>
-@endif
+
 
 
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -47,14 +43,24 @@
   </div>
   <div class="container mt-5">
     <div class="row">
-        <div class="col-md-8">
-            <h1>Explore and Find All Cateogry Events Ticket On-Step Here.</h1>
+        <div class="col-md-7">
+            <h1>Explore, Discover, and Secure Tickets for Every Event – All in One Place!</h1><i class="bi bi-box-arrow-in-up-right"></i>
         </div>
-        <div class="col-md-4">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste iusto officia adipisci incidunt reprehe
-                nderit quam, id natus quasi accusantium repellendus maiores possimus et aut aspernatur sit, nemo velit voluptate ad?</p>
-                <div class="mt-5">
-                    <b>Expolore your Tickets</b>
+        <div class="col-md-4 offset-md-1">
+            <p>
+                Embark on an upcoming adventure with Eventku! Let us guide you to exciting places for an unforgettable experience.
+            </p>
+                <div clss="mt-5">
+                    <p>
+                        <a href="#" class="text-decoration-none">
+                            Explore your Tickets
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5"></path>
+            <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0z"></path>
+          </svg>
+                        </a>
+                      </p>
+
                 </div>
         </div>
     </div>
@@ -62,14 +68,17 @@
         .custom-card {
             background-color: white;
             border: none !important;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            border-radius: 20px;
+
             height: 100%;
+
         }
 
         .custom-card img {
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
+
+
             height: 100%;
             object-fit: cover;
         }
@@ -93,21 +102,21 @@
             </div>
         </div>
         {{-- Search --}}
-        <section class="bg-white">
-        <div class="d-flex">
-            <p>UpComing</p>
-            <p>Coming Soon</p>
-            <p> Soon</p>
+        <section class="bg-white w-100 h-100 shadow rounded">
+        <div class="d-flex p-3 gap-3">
+            <span class=" fw-bold p-3">Concert</span>
+            <span class=" fw-light p-3">Event</span>
+            <span class="fw-light p-3">DoFun</span>
         </div>
         <div>
             <div class="row p-3">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <form action="{{ route('users.search') }}" method="GET" class="form-inline my-2 my-lg-0 d-flex">
                         <input class="form-control mr-sm-2  " type="search" placeholder="Search" aria-label="Search" name="query">
 
 
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
@@ -116,8 +125,9 @@
                       </select>
 
                 </div>
-                <div class="col-md-3">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ms-5" type="submit">Search</button>
+                <div class="col-md-2">
+                    <button class="btn btn-warning text-white my-2 my-sm-0 ms-5 p-3" type="submit">
+                        <i class="bi bi-search-heart"></i>Search</button>
                 </form>
                 </div>
             </div>
@@ -126,71 +136,6 @@
     </section>
   </div>
 
-    <div class="container mt-5">
-        <div class="row">
-            @auth
-                <div class="col-md-4">
-                    <h1>Daftar Pengguna</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Is Admin</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $user)
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    @if ($user->isAdmin == 1)
-                                    <td>True (1)</td>
-                                    @else
-                                    <td>False (0)</td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6 offset-md-2">
-            @else
-                <div class="col-md-6 offset-md-3">
-            @endauth
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Welcome to Mini Project Website</h2>
 
-                        @guest
-                            <p>Please <a href="{{ route('login') }}">login</a> or <a href="{{ route('register') }}">register</a> to access more features.</p>
-                        @else
-                            <p>Hello, {{ Auth::user()->name }}!</p>
-                            <p>Your email: {{ Auth::user()->email }}</p>
-                            <p>Role: {{ Auth::user()->isAdmin ? 'Admin' : 'User' }}</p>
-                        @endguest
-                    </div>
-                </div>
-            </div>
-            @auth
-                <div class="col-md-2"></div>
-            @endauth
-        </div>
-        @auth
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <form action="{{ route('users.search') }}" method="GET" class="form-inline my-2 my-lg-0 d-flex">
-                    <input class="form-control mr-sm-2  " type="search" placeholder="Search" aria-label="Search" name="query">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ms-5" type="submit">Search</button>
-                </form>
-
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-        @endauth
-    </div>
 
 @endsection

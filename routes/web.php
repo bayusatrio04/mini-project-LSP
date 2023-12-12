@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('auth.login');
 // });
 use App\Http\Controllers\HomeController;
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('guest');
+
 //Untuk Search
 Route::get('/users/search', [HomeController::class, 'search'])->name('users.search');
 

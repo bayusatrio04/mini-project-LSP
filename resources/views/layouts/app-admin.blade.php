@@ -58,12 +58,12 @@
 </head>
 <body >
     @if(session('success'))
-    <script>alert("{{ session('success') }}");</script>
-@endif
+        <script>alert("{{ session('success') }}");</script>
+    @endif
 
-@if(session('error'))
-    <script>alert("{{ session('error') }}");</script>
-@endif
+    @if(session('error'))
+        <script>alert("{{ session('error') }}");</script>
+    @endif
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="bootstrap" viewBox="0 0 118 94">

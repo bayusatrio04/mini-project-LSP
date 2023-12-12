@@ -7,7 +7,7 @@ Kelompok TTS
 Tim Tiba Tiba Sekelompok ( TTS )
 
 ## c. Nama Project
-Eventku - Platform Manajemen Acara
+Eventku - Platform Manajemen Acara / Konser
 
 ## d. List Fitur
 1. Pencarian dan Pendaftaran Acara
