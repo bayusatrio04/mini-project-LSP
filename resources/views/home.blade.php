@@ -8,7 +8,8 @@
     .custom-card {
         background-color: white;
         border: none !important;
-        border-radius: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
 
         height: 100%;
 
@@ -17,7 +18,6 @@
     .custom-card img {
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
-
 
         height: 280px;
         object-fit: cover;
@@ -78,6 +78,40 @@
 
     .custom-card:hover .overlay3 {
         background-color: rgba(0, 0, 0, 0.7);
+    }
+
+
+
+    .card {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover #description_ticekt {
+        opacity: 1;
+    }
+
+    .card:hover img {
+        filter: brightness(70%);
+        /* Mengurangi kecerahan gambar */
+    }
+
+    #description_ticekt {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 300px;
+        opacity: 0;
+        /* Default opacity: 0, hanya muncul saat di hover */
+        background-color: rgba(0, 0, 0, 0.7);
+        /* Warna latar belakang dengan alpha (transparansi) */
+        color: #fff;
+        /* Warna teks pada description */
+        padding: 20px;
+        text-align: justify;
+        transition: opacity 0.3s ease;
     }
 </style>
 
@@ -158,95 +192,86 @@
 
     <section class="mt-5 w-100 h-100">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card custom-card position-relative">
-                    <a href="">
-                        <img src="{{ asset('assets/images/events1.jpg') }}" class="card-img-top" alt="Event 1">
-                        <div class="overlay"></div>
+            <div class="col-md-12">
+                <div class="row">
 
-                        <div class="card-text-overlay">
-                            <p class="text-center text-white fw-bold">CONCERT</p>
+                    @foreach ($categories_take as $item)
+                    <div class="col-md-4">
+                        <div class="card custom-card position-relative">
+                            <a href="?category={{ $item->id }}">
+                                <img src="{{ asset('/') }}{{ get_image_category($item->category_image) }}"
+                                    class="card-img-top" alt="Event 1">
+                                <div class="overlay"></div>
+
+                                <div class="card-text-overlay">
+                                    <p class="text-center text-white fw-bold">{{ strtoupper($item->category_name) }}</p>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-
-            </div>
-            <div class="col-md-4">
-                <div class="card custom-card position-relative">
-                    <a href="">
-                        <img src="{{ asset('assets/images/events2.jpg') }}" class="card-img-top" alt="Event 1">
-                        <div class="overlay2"></div>
-
-                        <div class="card-text-overlay">
-                            <p class="text-center text-white fw-bold">EVENTS</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card custom-card position-relative">
-                    <a href="">
-                        <img src="{{ asset('assets/images/events3.jpg') }}" class="card-img-top" alt="Event 1">
-                        <div class="overlay3"></div>
-
-                        <div class="card-text-overlay">
-                            <p class="text-center text-white fw-bold">ALL</p>
-                        </div>
-                    </a>
-
-                    <div class="card-text-overlay">
-                        <p class="text-center text-white fw-bold">ALL</p>
                     </div>
+                    @endforeach
 
-                    <div class="card-text-overlay">
-                        <p class="text-center text-white fw-bold">ALL CATEGORIES</p>
+
+
+
+                    <div class="col-md-4">
+                        <div class="card custom-card position-relative">
+                            <a href="{{ url('/') }}">
+                                <img src="{{ asset('assets/images/events3.jpg') }}" class="card-img-top" alt="Event 1">
+                                <div class="overlay3"></div>
+
+                                <div class="card-text-overlay">
+                                    <p class="text-center text-white fw-bold">ALL CATEGORIES</p>
+                                </div>
+                            </a>
+                        </div>
 
                     </div>
 
-                    </a>
                 </div>
             </div>
-            {{-- Search --}} <section class="bg-white w-100 h-100 shadow rounded">
-                <div class="d-flex p-3 gap-3">
-                    <span class=" fw-bold p-3">Concert</span>
-                    <span class=" fw-light p-3">Event</span>
-                    <span class="fw-light p-3">DoFun</span>
-                </div>
-                <div>
-                    <div class="row p-3">
-                        <div class="col-md-6">
-                            <form action="{{ route('users.search') }}" method="GET"
-                                class="form-inline my-2 my-lg-0 d-flex">
-                                <input class="form-control mr-sm-2 p-4  " type="search" placeholder="Search"
-                                    aria-label="Search" name="query">
+
+            <div class="col-md-12">
+                <section class="bg-white shadow w-100 h-100 rounded">
+
+                    <div>
+                        <div class="row p-3">
+                            <div class="col-md-6">
+                                <form action="/" method="GET" class="form-inline my-2 my-lg-0 d-flex">
+                                    <input class="form-control mr-sm-2 p-4" placeholder="Search" name="event_name"
+                                        required>
 
 
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select p-4" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-select p-4" aria-label="Default select example" name="category">
+                                    <option selected disabled value="">Pilih Kategori</option>
+                                    @foreach ($categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                                    @endforeach
+                                </select>
 
-                        </div>
-                        <div class="col-md-2">
+                            </div>
+                            <div class="col-md-2">
 
-                            <button class="btn btn-warning text-white my-sm-0 ms-3 row" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                    class="bi bi-search-heart" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018" />
-                                    <path
-                                        d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11" />
-                                </svg>
-                                Search</button>
-                            </form>
+                                <button class="btn btn-warning text-white my-sm-0 ms-3 row" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                        class="bi bi-search-heart" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018" />
+                                        <path
+                                            d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11" />
+                                    </svg>
+                                    Search</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+
+            @include('event_list.list_event_home')
+
     </section>
 
 </div>

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Untuk Search
 Route::get('/users/search', [HomeController::class, 'search'])->name('users.search');

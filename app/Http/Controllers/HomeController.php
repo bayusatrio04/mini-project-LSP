@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -10,10 +12,28 @@ class HomeController extends Controller
     public function index()
     {
 
-        $data = [
+        if (!isset($_GET['category']) && !isset($_GET['event_name'])) {
 
+            $events = Event::all();
+        } elseif (isset($_GET['category']) && !isset($_GET['event_name']) || $_GET['event_name'] == "" && isset($_GET['category'])) {
+
+
+            $events = Event::byCategory($_GET['category'])->get();
+
+            // dd($events);
+        } elseif (isset($_GET['category']) && isset($_GET['event_name'])) {
+            $events = Event::byCategoryAndName($_GET['category'], $_GET['event_name'])->get();
+        } elseif (isset($_GET['event_name'])) {
+            $events = Event::byEventName($_GET['event_name'])->get();
+        }
+
+
+        $data = [
+            'categories_take' => Category::take(2)->get(),
+            'categories' => Category::all(),
             'users' => User::all(),
-            'user_login' => get_user_login()
+            'user_login' => get_user_login(),
+            'events' => $events
         ];
 
 
