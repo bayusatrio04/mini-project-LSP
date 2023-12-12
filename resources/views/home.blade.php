@@ -36,6 +36,10 @@
             <li class="nav-item">
                 <a class="nav-link bg-primary text-white p-2 mt-3" href="#">Delete Users</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link bg-warning text-white p-2 mt-3" href="{{ route('admin.dashboards') }}">Dashboard
+                    Admin</a>
+            </li>
 
         </ul>
 
