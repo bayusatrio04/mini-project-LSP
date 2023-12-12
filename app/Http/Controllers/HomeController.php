@@ -12,17 +12,17 @@ class HomeController extends Controller
     public function index()
     {
 
-        if (!isset($_GET['category']) && !isset($_GET['event_name'])) {
+        if (!isset($_GET['category_events']) && !isset($_GET['event_name'])) {
 
             $events = Event::all();
-        } elseif (isset($_GET['category']) && !isset($_GET['event_name']) || $_GET['event_name'] == "" && isset($_GET['category'])) {
+        } elseif (isset($_GET['category_events']) && !isset($_GET['event_name']) || $_GET['event_name'] == "" && isset($_GET['category_events'])) {
 
 
-            $events = Event::byCategory($_GET['category'])->get();
+            $events = Event::byCategory($_GET['category_events'])->get();
 
             // dd($events);
-        } elseif (isset($_GET['category']) && isset($_GET['event_name'])) {
-            $events = Event::byCategoryAndName($_GET['category'], $_GET['event_name'])->get();
+        } elseif (isset($_GET['category_events']) && isset($_GET['event_name'])) {
+            $events = Event::byCategoryAndName($_GET['category_events'], $_GET['event_name'])->get();
         } elseif (isset($_GET['event_name'])) {
             $events = Event::byEventName($_GET['event_name'])->get();
         }

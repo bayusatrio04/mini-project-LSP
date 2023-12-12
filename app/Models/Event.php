@@ -42,7 +42,7 @@ class Event extends Model
         'title',
         'description',
         'category_events',
-        'subCategory_events',
+
         'start_date',
         'end_date',
         'location',
@@ -52,5 +52,9 @@ class Event extends Model
         'image_path',
 
     ];
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'event_categories', 'id_event', 'id_category');
+    }
 
 }

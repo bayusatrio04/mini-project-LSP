@@ -83,7 +83,7 @@
         </div>
 
     </div>
-
+    @unless(Auth::user() && Auth::user()->isAdmin == 1)
     <div class="row">
         <div class="col-md-4">
             <form action="{{ route('pemesanan.beli_tiket', $event->id) }}" id="beli_tiket" method="POST">
@@ -103,6 +103,7 @@
             </form>
         </div>
 
+
         <div class="col-md-2">
             <div class="form-group mb-3">
                 <label for="name"></label>
@@ -110,6 +111,7 @@
             </div>
         </div>
     </div>
+    @endunless
 
 
 

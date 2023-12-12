@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
@@ -14,22 +15,25 @@ class CategorySeeder extends Seeder
     public function run()
     {
         // Example: Create and insert a user
-        DB::table('categories')->insert([
-            [
-                'category_name' => 'Concert',
+        $categories = [
+            'Galang Dana',
+            'Workshop',
+            'Seminar',
+            'Conference',
+            'Exhibition',
+            'Networking',
+            'Rock',
+            'Jazz',
+            'Pop',
+            'Classical',
+            'EDM',
+        ];
 
-                // 'isAdmin' => 0,
-
-            ],
-            [
-                'category_name' => 'Galang Dana',
-
-            ],
-            [
-                'category_name' => 'Kuliah Umum',
-
-            ],
-        ]);
+        foreach ($categories as $category) {
+            Category::create([
+                'category_name' => $category,
+            ]);
+        }
 
         // You can add more user records as needed
     }

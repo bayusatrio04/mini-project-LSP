@@ -12,4 +12,9 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $guarded = [];
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_categories', 'id_category', 'id_event');
+    }
 }
