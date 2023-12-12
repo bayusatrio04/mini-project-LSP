@@ -50,7 +50,7 @@ class CustomerController extends Controller
 
         $attributes = [
             'name' => $request->name,
-            'age' => $request->age,
+            'ages' => $request->age,
             'gender' => $request->gender,
             'email' => $request->email,
         ];

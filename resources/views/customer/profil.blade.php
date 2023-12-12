@@ -123,7 +123,7 @@
                     <label for="age">Age</label>
 
                     <input id="age" type="number" class="form-control @error('age') is-invalid @enderror" name="age"
-                        value="{{ $user_login->age }}" required autocomplete="age">
+                        value="{{ $user_login->ages }}" required autocomplete="age">
 
                     @error('age')
                     <span class="invalid-feedback" role="alert">

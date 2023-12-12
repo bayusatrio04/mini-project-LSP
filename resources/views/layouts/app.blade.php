@@ -30,15 +30,6 @@
 
     @include('layouts.navbar')
 
-
-    @if(session('error'))
-    <script>
-        alert("{{ session('error') }}");
-    </script>
-    @endif
-
-
-
     <div class="container mt-5">
         @yield('content')
     </div>
