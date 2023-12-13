@@ -34,6 +34,7 @@ class OrdersAdminController extends Controller
     public function update(Request $request, Transaction $order)
     {
 
+        // dd($order);
         $order->update(['status_transaction' => 3]);
 
         return back()->with('success', 'Konfirmasi pembayaran berhasil!');
