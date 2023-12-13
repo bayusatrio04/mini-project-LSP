@@ -49,7 +49,7 @@
                 </thead>
                 <tbody>
 
-                    @foreach ($transaksi as $item)
+                    @foreach ($transaction as $item)
 
 
                     <tr>

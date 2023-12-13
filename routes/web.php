@@ -9,6 +9,7 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CustomerAdminController;
+use App\Http\Controllers\OrdersAdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
@@ -64,6 +65,16 @@ Route::middleware(['web', 'admin'])->group(function () {
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 
 
+        //orders
+        Route::get('admin/orders/{id}', [OrdersAdminController::class, 'show'])->name('orders.show');
+        Route::get('admin/orders/{id}/edit', [OrdersAdminController::class, 'edit'])->name('orders.edit');
+        Route::put('admin/orders/{order}', [OrdersAdminController::class, 'update'])->name('orders.update');
+        Route::put('admin/orders/{order}', [OrdersAdminController::class, 'refund'])->name('orders.update.refund');
+        Route::delete('admin/orders/{id}', [OrdersAdminController::class, 'destroy'])->name('orders.destroy');
+        Route::get('admin/orders/{id}/print', [OrdersAdminController::class, 'print'])->name('orders.print');
+        Route::get('admin/orders/{id}/download', [OrdersAdminController::class, 'download'])->name('orders.download');
+
+        //endorders
 
 
     Route::get('admin/events', [EventController::class, 'index'])->name('admin.events');

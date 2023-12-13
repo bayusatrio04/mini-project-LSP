@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
 use App\Models\Transaction;
 
 class AdminController extends Controller
@@ -36,7 +37,8 @@ class AdminController extends Controller
     }
     public function orders()
     {
-        return view("admin.orders");
+        $transaction = Transaction::all();
+        return view("admin.orders" ,   compact('transaction'));
     }
 
     public function products()
