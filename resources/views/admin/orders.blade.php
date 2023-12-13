@@ -65,29 +65,32 @@
                         <td>{{ $item->qty }} Tiket</td>
                         <td>{{ rupiah($item->total_transaction) }}</td>
                         @if($item->status_transaction === 3)
-                            <td>
-                                {!! status_transaksi($item->status_transaction) !!}
-                            </td>
+                        <td>
+                            {!! status_transaksi($item->status_transaction) !!}
+                        </td>
                         @elseif($item->status_transaction === 1)
-                            <td>
-                                {!! status_transaksi($item->status_transaction) !!}
-                            </td>
+                        <td>
+                            {!! status_transaksi($item->status_transaction) !!}
+                        </td>
                         @else
-                            <td>
-                                {{ sisa_waktu_bayar($item->created_at) }}
-                            </td>
+                        <td>
+                            {{ sisa_waktu_bayar($item->created_at) }}
+                        </td>
                         @endif
                         <td class="ms-3 mt-3">
                             <a href="{{ route('orders.show', $item->id) }}" class="btn btn-info">Read</a>
-                            <form action="{{ route('orders.destroy', $item->id) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('orders.destroy', $item->id) }}" method="POST"
+                                style="display: inline;">
 
 
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger ms-0">Delete</button>
                             </form>
-                            <a href="{{ route('orders.print', $item->id) }}" class="btn btn-success" target="_blank">Cetak Bukti</a>
-                            <a href="{{ route('orders.download', $item->id) }}" class="btn btn-info" target="_blank">Download Bukti</a>
+                            <a href="{{ route('orders.print', $item->id) }}" class="btn btn-success"
+                                target="_blank">Cetak Bukti</a>
+                            <a href="{{ route('orders.download', $item->id) }}" class="btn btn-info"
+                                target="_blank">Download Bukti</a>
 
                         </td>
 
@@ -113,4 +116,3 @@
 </div>
 
 @endsection
-
