@@ -35,7 +35,7 @@
                     <p><strong>Ages:</strong>  <input type="text" class="form-control" name="ages" value="{{ $user->ages }}" readonly></p>
                     <p>
 
-                        <span class="badge text-bg-primary">{{ $user->isAdmin }}</span>
+
                     </p>
                     <button type="submit" class="btn btn-primary">Update User</button>
                     </form>

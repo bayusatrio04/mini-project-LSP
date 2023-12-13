@@ -82,21 +82,20 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-
-        return view('admin.events.update', compact('event'));
+        $categories = Category::all();
+        return view('admin.events.update', compact('event', 'categories'));
     }
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required',
-            'subCategory' => 'required',
+            'description' => 'required',
+            'category_events' => 'required|array|min:1',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'location' => 'required|string|max:255',
-            'ticket_price' => 'required|numeric',
-            'total_tickets' => 'required|integer',
+            'ticket_price' => 'required',
+            'total_tickets' => 'required',
             'image' => 'required',
         ]);
 
@@ -104,8 +103,8 @@ class EventController extends Controller
 
         $event->title = $validatedData['title'];
         $event->description = $validatedData['description'];
-        $event->category_events = $validatedData['category'];
-        $event->subCategory_events = $validatedData['subCategory'];
+        $event->category_events = $validatedData['category_events'];
+
         $event->start_date = $validatedData['start_date'];
         $event->end_date = $validatedData['end_date'];
         $event->location = $validatedData['location'];
@@ -128,6 +127,17 @@ class EventController extends Controller
 
 
         $event->save();
+
+        foreach ($request->input('category_events') as $item) {
+
+
+            $data = [
+                'id_event'  => $event->id,
+                'id_category' => $item
+            ];
+
+            EventCategory::create($data);
+        }
 
         return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Event has been updated successfully.');
     }
