@@ -62,6 +62,10 @@ Route::prefix('riwayat_transaksi')->middleware('auth')->group(function () {
 Route::middleware(['web', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboards'])->name('admin.dashboards');
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+
+
+
+
     Route::get('admin/events', [EventController::class, 'index'])->name('admin.events');
     Route::get('admin/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('admin/events', [EventController::class, 'store'])->name('events.store');
@@ -69,14 +73,13 @@ Route::middleware(['web', 'admin'])->group(function () {
     Route::get('admin/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('admin/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
-    //End Events
 
-    //customers
-    Route::get('admin/customers/create', [CustomerAdminController::class, 'create'])->name('customers.create');
-    Route::post('admin/customers/create', [CustomerAdminController::class, 'store'])->name('customers.store');
-    Route::get('admin/customers/{id}', [CustomerAdminController::class, 'show'])->name('customers.show');
-    Route::get('admin/customers/{id}/edit', [CustomerAdminController::class, 'edit'])->name('customers.edit');
-    Route::put('admin/customers/{id}/edit', [CustomerAdminController::class, 'update'])->name('customers.update');
-    Route::delete('admin/customers/{id}', [CustomerAdminController::class, 'destroy'])->name('customers.destroy');
-    //end customers
+
+    Route::get('admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
+    Route::get('admin/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('admin/customers/create', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('admin/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('admin/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('admin/customers/{id}/edit', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('admin/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 });
