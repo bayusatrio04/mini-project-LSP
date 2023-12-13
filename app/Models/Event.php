@@ -44,19 +44,4 @@ class Event extends Model
             ->where('events.title', 'like', '%' . $eventName . '%')
             ->distinct();
     }
-
-    protected $fillable = [
-        'title',
-        'description',
-        'category_events',
-
-        'start_date',
-        'end_date',
-        'location',
-        'ticket_price',
-        'total_tickets',
-        'sold_tickets',
-        'image_path',
-
-    ];
 }
