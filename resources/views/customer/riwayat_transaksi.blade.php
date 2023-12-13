@@ -193,12 +193,10 @@
         $('#bukti_bayar').change(function() {
             // Ambil file input
             var inputFile = this;
-
             // Cek apakah file telah dipilih
             if (inputFile.files && inputFile.files[0]) {
                 var fileSize = inputFile.files[0].size; // Ukuran file dalam byte
                 var maxSize = 2 * 1024 * 1024; // Maksimum 2 MB (sesuaikan dengan kebutuhan Anda)
-
                 // Cek apakah ukuran file melebihi batas maksimum
                 if (fileSize > maxSize) {
                     alert('Ukuran gambar melebihi batas maksimum (2 MB).');

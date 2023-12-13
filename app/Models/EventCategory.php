@@ -11,5 +11,5 @@ class EventCategory extends Model
 
     protected $tabel = 'event_categories';
 
-    protected $gurded = [];
+    protected $guarded = [];
 }

@@ -66,9 +66,9 @@ class PemesananController extends Controller
 
         // $pembelian = Transaction::where('id_event', $id_event)->where('id_user', get_user_login()->id)->whereIn('status_transaction', [0, 1, 3])->first();
         $pembelian = Transaction::where('id_event', $id_event)
-        ->where('id_user', $user->id)
-        ->whereIn('status_transaction', [0, 1, 3])
-        ->first();
+            ->where('id_user', $user->id)
+            ->whereIn('status_transaction', [0, 1, 3])
+            ->first();
 
         // dd($pembelian->qty);
 
@@ -127,13 +127,32 @@ class PemesananController extends Controller
 
     public function pembayaran()
     {
+
+        $transaksiBelumBayar = Transaction::get_transaksi_belum_bayar();
+
+        // Update status pembayaran jika sudah melebihi satu hari
+        foreach ($transaksiBelumBayar as $transaksi) {
+            $tanggalPembayaran = Carbon::parse($transaksi->created_at);
+            $sekarang = Carbon::now();
+
+            // Periksa apakah sudah melebihi satu hari
+            if ($tanggalPembayaran->diffInDays($sekarang) >= 1) {
+                // Update status pembayaran menjadi dibatalkan atau sesuai kebutuhan
+                $transaksi->update(['status_transaction' => 2]);
+
+                $event = Event::find($transaksi->id_event);
+                $event->update(['total_tickets' => $event->total_tickets + $transaksi->qty]);
+            }
+        }
+
+
         $user = get_user_login();
         if (!$user) {
             return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
         $data = [
             'user_login' => get_user_login(),
-            'transaksi' => Transaction::get_transaksi_belum_bayar()
+            'transaksi' => $transaksiBelumBayar
         ];
 
 
