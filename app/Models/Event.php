@@ -22,20 +22,26 @@ class Event extends Model
     public function scopeByCategory($query, $categoryId)
     {
         return $query->join('event_categories', 'events.id', '=', 'event_categories.id_event')
-            ->where('event_categories.id_category', $categoryId);
+            ->select('events.*')
+            ->where('event_categories.id_category', $categoryId)
+            ->distinct();
     }
 
     public function scopeByCategoryAndName($query, $categoryId, $eventName)
     {
         return $query->join('event_categories', 'events.id', '=', 'event_categories.id_event')
+            ->select('events.*')
             ->where('event_categories.id_category', $categoryId)
-            ->where('events.title', 'like', '%' . $eventName . '%');
+            ->where('events.title', 'like', '%' . $eventName . '%')
+            ->distinct();
     }
 
     public function scopeByEventName($query, $eventName)
     {
         return $query->join('event_categories', 'events.id', '=', 'event_categories.id_event')
-            ->where('events.title', 'like', '%' . $eventName . '%');
+            ->select('events.*')
+            ->where('events.title', 'like', '%' . $eventName . '%')
+            ->distinct();
     }
 
     protected $fillable = [
@@ -52,5 +58,4 @@ class Event extends Model
         'image_path',
 
     ];
-
 }
