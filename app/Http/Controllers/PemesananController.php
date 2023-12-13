@@ -126,7 +126,10 @@ class PemesananController extends Controller
 
     public function pembayaran()
     {
-
+        $user = get_user_login();
+        if (!$user) {
+            return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
         $data = [
             'user_login' => get_user_login(),
             'transaksi' => Transaction::get_transaksi_belum_bayar()
@@ -193,6 +196,10 @@ class PemesananController extends Controller
 
     public function riwayat_transaksi()
     {
+        $user = get_user_login();
+        if (!$user) {
+            return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
         $data = [
             'user_login' => get_user_login(),
             'transaksi' => Transaction::get_transaksi_riwayat()

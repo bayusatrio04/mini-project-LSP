@@ -12,17 +12,8 @@
       <h1 class="h2">Dashboard</h1>
     </div>
     <div class="row">
-        <!-- Your other HTML content here -->
 
-        <!-- Your multiple select element -->
-        <div class="col-md-6 mb-3 mt-3 text-info">
-            <select multiple name="category" id="languages" class="text-success">
-                <option value="js" class="text-primary">JavaScript</option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
 
-            </select>
-        </div>
     </div>
     <div class="row">
         <!-- Total Customers Card -->
@@ -30,7 +21,7 @@
             <div class="card border-primary mb-3">
                 <div class="card-body text-primary">
                     <h5 class="card-title">Total Customers</h5>
-                    <p class="card-text h2">500</p>
+                    <p class="card-text h2">{{ $userCount }}</p>
                 </div>
             </div>
         </div>
@@ -40,7 +31,7 @@
             <div class="card border-success mb-3">
                 <div class="card-body text-success">
                     <h5 class="card-title">Total Pembelian Ticket</h5>
-                    <p class="card-text h2">2000</p>
+                    <p class="card-text h2">{{ $transactionCount }}</p>
                 </div>
             </div>
         </div>
@@ -50,7 +41,7 @@
             <div class="card border-info mb-3">
                 <div class="card-body text-info">
                     <h5 class="card-title">Total Rupiah</h5>
-                    <p class="card-text h2">Rp 1,500,000,000</p>
+                    <p class="card-text h2">{{  rupiah($totalTransactionAmount) }}</p>
                 </div>
             </div>
         </div>
@@ -60,7 +51,7 @@
             <div class="card border-success mb-3">
                 <div class="card-body text-success">
                     <h5 class="card-title">Total Ticket Berhasil</h5>
-                    <p class="card-text h2">1500</p>
+                    <p class="card-text h2">{{ $paidCount }}</p>
                 </div>
             </div>
         </div>
@@ -70,7 +61,31 @@
             <div class="card border-danger mb-3">
                 <div class="card-body text-danger">
                     <h5 class="card-title">Total Gagal/Refund Ticket</h5>
-                    <p class="card-text h2">50</p>
+                    <p class="card-text h2">{{ $refundProcessingCount }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-warning mb-3">
+                <div class="card-body text-warning">
+                    <h5 class="card-title">Total Transaksi Belum Bayar</h5>
+                    <p class="card-text h2">{{ $unpaidCount }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success mb-3">
+                <div class="card-body text-success">
+                    <h5 class="card-title">Total Transaksi ter-Confirm</h5>
+                    <p class="card-text h2">{{ $paymentReceivedCount }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-info mb-3">
+                <div class="card-body text-info">
+                    <h5 class="card-title">Total Transaksi dibatalkan</h5>
+                    <p class="card-text h2">{{ $canceledCount }}</p>
                 </div>
             </div>
         </div>
@@ -79,16 +94,6 @@
 
   </main>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-
-
-<script src="{{ asset('assets/js/filter-multi-select-bundle.min.js') }}"></script>
-
-<script>
-    const languages = $('#languages').filterMultiSelect();
-
-
-  </script>
 
 @endsection
