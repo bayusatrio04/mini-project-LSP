@@ -3,6 +3,7 @@
 @section('title', 'Create Event')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('assets/css/filter_multi_select.css') }}">
 <div class="mb-3">
     <h2>Create Event</h2>
 </div>
@@ -20,30 +21,16 @@
         {{-- <textarea name="description" id="editor" class="form-control"  rows="4" cols="50" required></textarea> --}}
 
     </div>
-    <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
-        <select class="form-select" name="category" id="category" aria-label="Default select example">
-            <option selected>Choose Categories</option>
-            <option value="Events">Events</option>
-            <option value="Concert">Concert</option>
-        </select>
-    </div>
 
     <div class="mb-3" >
-        <label for="subCategory" class="form-label">Termasuk dalam  <span class="fw-bold">sub Category</span> apa?</label>
-        <select class="form-select" name="subCategory" id="subCategory" aria-label="Default select example">
-            <option selected>Choose subCategories</option>
-            <!-- Subkategori untuk kategori "Events" -->
-            <option value="Event Workshop">Event Workshop</option>
-            <option value="Event Seminar">Event Seminar</option>
-            <option value="Event Conference">Event Conference</option>
-            <option value="Event Exhibition">Event Exhibition</option>
-            <option value="Event Networking ">Event Networking</option>
-            <option value="Concert Rock">Concert Rock</option>
-            <option value="Concert Jazz">Concert Jazz</option>
-            <option value="Concert Pop">Concert Pop</option>
-            <option value="Concert Classical">Concert Classical</option>
-            <option value="Concert EDM">Concert EDM</option>
+        <label for="Type Category" class="form-label">Termasuk dalam  <span class="fw-bold"> Category</span> apa?</label>
+        <select multiple name="category_events[]" id="languages" class="form-control">
+            @foreach ($categories as $category )
+
+        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+            @endforeach
+
+
         </select>
     </div>
 
@@ -84,4 +71,17 @@
 
     <button type="submit" class="btn btn-primary">Create Event</button>
 </form>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="{{ asset('assets/js/filter-multi-select-bundle.min.js') }}"></script>
+
+<script>
+    const languages = $('#languages').filterMultiSelect();
+
+
+  </script>
+
 @endsection

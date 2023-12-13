@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Category;
 
 use Illuminate\Support\Facades\Storage;
 class EventController extends Controller
@@ -15,8 +16,8 @@ class EventController extends Controller
         return view('admin.events', compact('events'));
     }
     public function create(){
-
-        return view('admin.events.create');
+        $categories = Category::all();
+        return view('admin.events.create', compact('categories'));
     }
     public function store(Request $request)
     {
@@ -24,9 +25,7 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
-            'category' => 'required',
-            'subCategory' => 'required',
-
+            'category_events' => 'required|array|min:1',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'location' => 'required|string|max:255',
@@ -40,11 +39,10 @@ class EventController extends Controller
 
         $imagePath = $request->file('image')->store('events', 'public');
 
-        Event::create([
+        $event = new Event([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'category_events' => $request->input('category'),
-            'subCategory_events' => $request->input('subCategory'),
+            'category_events' => implode(',', $request->input('category_events')),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
             'location' => $request->input('location'),
@@ -52,6 +50,9 @@ class EventController extends Controller
             'total_tickets' => $request->input('total_tickets'),
             'image_path' => $imagePath,
         ]);
+
+        $event->save();
+        $event->categories()->attach($request->input('category_events'));
 
 
         return redirect()->route('admin.events')->with('success', 'Event created successfully.');
@@ -61,7 +62,8 @@ class EventController extends Controller
     {
 
         $event = Event::findOrFail($id);
-        return view('admin.events.show', compact('event'));
+        $categories = Category::all();
+        return view('admin.events.show', compact('event', 'categories'));
     }
 
     public function edit($id)

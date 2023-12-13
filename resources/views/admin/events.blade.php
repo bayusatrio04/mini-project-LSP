@@ -35,7 +35,7 @@
                     <td class="ms-3 mt-3">
                         <a href="{{ route('events.show', $event->id) }}" class="btn btn-info">Read</a>
                         <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning">Update</a>
-                        <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display: inline;>
+                        <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger ms-0">Delete</button>
