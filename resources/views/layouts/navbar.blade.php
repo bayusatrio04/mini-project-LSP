@@ -22,25 +22,14 @@
                         <a class="nav-link @if (!isset($value)) active @endif" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if (isset($value) && $value == 'pembayaran') active @endif" href="{{ route('pembayaran') }}">Pembayaran</a>
-                    </li>
-
-                    <li class="nav-item">
-<<<<<<< HEAD
-                        <a class="nav-link @if (isset($value) && $value == 'riwayat_transaksi') active @endif" href="{{ route('riwayat_transaksi') }}">Riwayat Transaksi</a>
-                    </li>
-=======
-                        <a class="nav-link @if ($value == 'pembayaran') active @endif"
+                        <a class="nav-link @if (isset($value) && $value == 'pembayaran') active @endif"
                             href="{{ route('pembayaran') }}">Pembayaran</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link @if ($value == 'riwayat_transaksi') active @endif"
+                        <a class="nav-link @if (isset($value) && $value == 'riwayat_transaksi') active @endif"
                             href="{{ route('riwayat_transaksi') }}">Riwayat Transaksi</a>
                     </li>
-
-
->>>>>>> customer
                 </ul>
 
                 <div class="d-flex">

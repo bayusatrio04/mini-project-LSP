@@ -30,7 +30,6 @@
 
     @include('layouts.navbar')
 
-<<<<<<< HEAD
 
     @if(session('error'))
     <script>
@@ -40,8 +39,6 @@
 
 
 
-=======
->>>>>>> customer
     <div class="container mt-5">
         @yield('content')
     </div>
