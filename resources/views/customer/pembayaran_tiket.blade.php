@@ -79,7 +79,7 @@
                         </td>
                         <td>
                             @php
-                                $id = $item->id;
+                            $id = $item->id;
                             @endphp
                             <a class="btn btn-danger" href="{{ route('pemesanan.batal', $item->id) }}">Batalkan</a>
                             <button type="button" class="btn btn-primary bayar-modal" data-bs-toggle="modal"
@@ -89,49 +89,57 @@
 
                     </tr>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="modalBayar" tabindex="-1" aria-labelledby="modalBayarLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="modalBayarLabel">Pembayaran Tiket</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalBayar" tabindex="-1" aria-labelledby="modalBayarLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="modalBayarLabel">Pembayaran Tiket</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
 
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <strong>Perhatian!</strong> Lakukan pembayaran ke rekening BCA (123312333) a.n Mulyanto Supriadi
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>Perhatian!</strong> Lakukan pembayaran ke rekening BCA (123312333) a.n
+                                        Mulyanto Supriadi
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <form action="{{ route('pembayaran.bayar_tiket') }}" id="formBayar" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" id="id_transaksi" name="id_transaksi"
+                                            value="{{ $item->id }}">
+
+                                        <div class="form-group mb-3">
+                                            <label for="bukti_bayar">Bukti Bayar</label>
+                                            <input id="bukti_bayar" type="file"
+                                                class="form-control @error('bukti_bayar') is-invalid @enderror"
+                                                name="bukti_bayar" value="{{ old('bukti_bayar') }}" accept="image/*"
+                                                required>
+                                            @error('bukti_bayar')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
-
-                                        <form action="{{ route('pembayaran.bayar_tiket') }}" id="formBayar" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-
-                                            <input type="hidden" id="id_transaksi" name="id_transaksi" value="{{ $item->id }}">
-
-                                            <div class="form-group mb-3">
-                                                <label for="bukti_bayar">Bukti Bayar</label>
-                                                <input id="bukti_bayar" type="file"
-                                                    class="form-control @error('bukti_bayar') is-invalid @enderror" name="bukti_bayar"
-                                                    value="{{ old('bukti_bayar') }}" accept="image/*" required>
-                                                @error('bukti_bayar')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                                <button type="submit" form="formBayar" class="btn btn-primary">Bayar</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Tutup</button>
+                                            <button type="submit" form="formBayar"
+                                                class="btn btn-primary">Bayar</button>
+                                        </div>
+                                    </form>
 
                                 </div>
+
                             </div>
                         </div>
+                    </div>
                     @endforeach
 
                 </tbody>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -36,6 +37,8 @@ class Event extends Model
     {
         return $query->join('event_categories', 'events.id', '=', 'event_categories.id_event')
             ->where('events.title', 'like', '%' . $eventName . '%');
+        // ->groupBy('events.id');
+        // ->select('events.*');
     }
 
     protected $fillable = [
@@ -56,5 +59,4 @@ class Event extends Model
     {
         return $this->belongsToMany(Category::class, 'event_categories', 'id_event', 'id_category');
     }
-
 }

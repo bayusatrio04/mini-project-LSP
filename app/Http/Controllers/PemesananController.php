@@ -65,9 +65,9 @@ class PemesananController extends Controller
 
         // $pembelian = Transaction::where('id_event', $id_event)->where('id_user', get_user_login()->id)->whereIn('status_transaction', [0, 1, 3])->first();
         $pembelian = Transaction::where('id_event', $id_event)
-        ->where('id_user', $user->id)
-        ->whereIn('status_transaction', [0, 1, 3])
-        ->first();
+            ->where('id_user', $user->id)
+            ->whereIn('status_transaction', [0, 1, 3])
+            ->first();
 
         // dd($pembelian->qty);
 
@@ -126,6 +126,9 @@ class PemesananController extends Controller
 
     public function pembayaran()
     {
+
+
+
         $user = get_user_login();
         if (!$user) {
             return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
