@@ -18,6 +18,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('home') }}">Home</a>
                     </li>
+                    @if(Auth::user() && Auth::user()->isAdmin == 0)
                     <li class="nav-item">
                         <a class="nav-link @if (isset($value) && $value == 'pembayaran') active @endif" href="{{ route('pembayaran') }}">Pembayaran</a>
                     </li>
@@ -25,6 +26,7 @@
                     <li class="nav-item">
                         <a class="nav-link @if (isset($value) && $value == 'riwayat_transaksi') active @endif" href="{{ route('riwayat_transaksi') }}">Riwayat Transaksi</a>
                     </li>
+                    @endif
                 </ul>
 
                 <div class="d-flex">
@@ -39,7 +41,7 @@
                                 <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
                             </li>
                             @else
-                            {{-- @if(Auth::user() && Auth::user()->isAdmin) --}}
+                           {{-- @if(Auth::user() && Auth::user()->isAdmin) --}}
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"

@@ -25,6 +25,7 @@ class PemesananController extends Controller
     public function index($id)
     {
         $event = Event::find($id);
+        $categories = Category::all();
 
         if (!$event) {
             return redirect('/')->with('error', 'Event tidak ditemukan!');
@@ -38,7 +39,7 @@ class PemesananController extends Controller
                 'event' => $event
             ];
 
-            return view('customer.beli_tiket', $data);
+            return view('customer.beli_tiket', $data, compact('categories'));
         }
     }
 

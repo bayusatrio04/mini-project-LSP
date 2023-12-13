@@ -51,11 +51,6 @@
                         <td>{{ format_time($transactions->event->start_date) }} - {{ format_time($transactions->event->end_date) }}</td>
                     </tr>
 
-                    <tr>
-                        <td>Sisa Tiket</td>
-                        <td>:</td>
-                        <td>{{ $transactions->event->total_tickets }} pcs</td>
-                    </tr>
 
                     <!-- Informasi Transaksi -->
                     <tr>
@@ -77,7 +72,7 @@
                     </tr>
                     <tr>
                         @if ($transactions->status_transaction == 1)
-                        <td></td>
+
                         <td>Bukti Pembayaran</td>
                         <td>:</td>
                         <td class="">
@@ -88,8 +83,8 @@
                                 download=""><i class="bi bi-cloud-download"></i></a>
                             </td>
                             @elseif ($transactions->status_transaction == 2)
-                            <td></td>
-
+                            <td>Order Tiket Batal</td>
+                        </td>
                         @endif
                     </tr>
                     <tr>
@@ -103,7 +98,8 @@
                                 <button type="submit" class="btn btn-success">Konfirmasi</button>
                             </form>
                         </td>
-                        @elseif ($transactions->status_transaction == 4)
+                        @endif
+                        @if ($transactions->status_transaction == 4)
                         <td>Konfirmasi Refund</td>
                         <td>:</td>
                         <td>

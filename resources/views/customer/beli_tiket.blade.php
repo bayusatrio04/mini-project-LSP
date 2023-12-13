@@ -46,6 +46,20 @@
 
                 <table class="table">
                     <tr>
+                        <td>Category</td>
+                        <td>:</td>
+                        <td>
+                            @foreach(explode(',', $event->category_events) as $categoryId)
+                            @php
+                                $category = $categories->where('id', $categoryId)->first();
+                            @endphp
+                            @if($category)
+                            <span class="badge text-bg-warning">{{ $category->category_name }}</span>
+                            @endif
+                        @endforeach
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Harga</td>
                         <td>:</td>
                         <td>{{ rupiah($event->ticket_price) }}</td>
