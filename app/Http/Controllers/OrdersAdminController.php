@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use PDF;
+
 class OrdersAdminController extends Controller
 {
     public function orders()
     {
+
+        //ada perubahan
 
         $data = [
 
@@ -21,7 +24,7 @@ class OrdersAdminController extends Controller
     public function show($id)
     {
 
-       // Di dalam controller
+        // Di dalam controller
         $transactions = Transaction::with('event')->findOrFail($id);
 
 
@@ -42,10 +45,11 @@ class OrdersAdminController extends Controller
 
         return back()->with('success', 'Konfirmasi Refund berhasil!');
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $order = Transaction::findOrFail($id);
         $order->delete();
-        return back()->with('success','Berhasil Hapus Orderan Ticket');
+        return back()->with('success', 'Berhasil Hapus Orderan Ticket');
     }
 
     public function print($id)
@@ -60,7 +64,4 @@ class OrdersAdminController extends Controller
 
         return $pdf->download('bukti_orders.pdf');
     }
-
-
-
 }
