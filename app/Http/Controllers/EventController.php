@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Category;
-
+use App\Models\EventCategory;
 use Illuminate\Support\Facades\Storage;
+
 class EventController extends Controller
 {
     public function index()
@@ -15,7 +16,8 @@ class EventController extends Controller
 
         return view('admin.events', compact('events'));
     }
-    public function create(){
+    public function create()
+    {
         $categories = Category::all();
         return view('admin.events.create', compact('categories'));
     }
@@ -37,7 +39,7 @@ class EventController extends Controller
         ]);
 
 
-        $imagePath = $request->file('image')->store('events', 'public');
+        $imagePath = $request->file('image')->store('events_img', 'public');
 
         $event = new Event([
             'title' => $request->input('title'),
@@ -52,7 +54,18 @@ class EventController extends Controller
         ]);
 
         $event->save();
-        $event->categories()->attach($request->input('category_events'));
+        // $event->categories()->attach($request->input('category_events'));
+
+        foreach ($request->input('category_events') as $item) {
+
+
+            $data = [
+                'id_event'  => $event->id,
+                'id_category' => $item
+            ];
+
+            EventCategory::create($data);
+        }
 
 
         return redirect()->route('admin.events')->with('success', 'Event created successfully.');
@@ -92,7 +105,7 @@ class EventController extends Controller
         $event->title = $validatedData['title'];
         $event->description = $validatedData['description'];
         $event->category_events = $validatedData['category'];
-        $event->subCategory_events= $validatedData['subCategory'];
+        $event->subCategory_events = $validatedData['subCategory'];
         $event->start_date = $validatedData['start_date'];
         $event->end_date = $validatedData['end_date'];
         $event->location = $validatedData['location'];
@@ -117,7 +130,6 @@ class EventController extends Controller
         $event->save();
 
         return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Event has been updated successfully.');
-
     }
 
     public function destroy(Event $event)
