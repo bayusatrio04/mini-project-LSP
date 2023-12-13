@@ -182,7 +182,11 @@
     $(document).on("click", ".bayar-modal", function () {
      var myBookId = $(this).data('id');
      $(".modal-body #id_transaksi").val( myBookId );
+<<<<<<< HEAD
      // As pointed out in comments,
+=======
+     // As pointed out in comments, 
+>>>>>>> customer
      // it is unnecessary to have to manually call the modal.
      // $('#addBookDialog').modal('show');
 });
@@ -193,12 +197,20 @@
         $('#bukti_bayar').change(function() {
             // Ambil file input
             var inputFile = this;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> customer
             // Cek apakah file telah dipilih
             if (inputFile.files && inputFile.files[0]) {
                 var fileSize = inputFile.files[0].size; // Ukuran file dalam byte
                 var maxSize = 2 * 1024 * 1024; // Maksimum 2 MB (sesuaikan dengan kebutuhan Anda)
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> customer
                 // Cek apakah ukuran file melebihi batas maksimum
                 if (fileSize > maxSize) {
                     alert('Ukuran gambar melebihi batas maksimum (2 MB).');
@@ -209,4 +221,8 @@
     });
 </script>
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> customer

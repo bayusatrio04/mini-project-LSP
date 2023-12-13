@@ -16,8 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
 
+<<<<<<< HEAD
             $table->string('category_events');
 
+=======
+            $table->string('category_events')->nullable();
+            $table->string('subCategory_events')->nullable();
+>>>>>>> customer
 
             $table->dateTime('start_date');
             $table->dateTime('end_date');
@@ -27,11 +32,6 @@ return new class extends Migration
             $table->integer('sold_tickets')->default(0);
             $table->string('image_path')->nullable();
             $table->timestamps();
-
-
-
-
-
         });
     }
 

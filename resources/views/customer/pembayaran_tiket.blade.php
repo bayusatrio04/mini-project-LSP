@@ -78,9 +78,13 @@
                             {{ sisa_waktu_bayar($item->created_at) }}
                         </td>
                         <td>
+<<<<<<< HEAD
                             @php
                             $id = $item->id;
                             @endphp
+=======
+
+>>>>>>> customer
                             <a class="btn btn-danger" href="{{ route('pemesanan.batal', $item->id) }}">Batalkan</a>
                             <button type="button" class="btn btn-primary bayar-modal" data-bs-toggle="modal"
                                 data-bs-target="#modalBayar" data-id="{{ $item->id }}">Bayar</button>
@@ -89,6 +93,7 @@
 
                     </tr>
 
+<<<<<<< HEAD
                     <!-- Modal -->
                     <div class="modal fade" id="modalBayar" tabindex="-1" aria-labelledby="modalBayarLabel"
                         aria-hidden="true">
@@ -140,6 +145,9 @@
                             </div>
                         </div>
                     </div>
+=======
+
+>>>>>>> customer
                     @endforeach
 
                 </tbody>
@@ -161,7 +169,52 @@
 </div>
 
 
+<<<<<<< HEAD
 
+=======
+<!-- Modal -->
+<div class="modal fade" id="modalBayar" tabindex="-1" aria-labelledby="modalBayarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalBayarLabel">Pembayaran Tiket</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Perhatian!</strong> Lakukan pembayaran ke rekening BCA (123312333) a.n Mulyanto Supriadi
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <form action="{{ route('pembayaran.bayar_tiket') }}" id="formBayar" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+
+                    <input type="hidden" id="id_transaksi" name="id_transaksi">
+
+                    <div class="form-group mb-3">
+                        <label for="bukti_bayar">Bukti Bayar</label>
+                        <input id="bukti_bayar" type="file"
+                            class="form-control @error('bukti_bayar') is-invalid @enderror" name="bukti_bayar"
+                            value="{{ old('bukti_bayar') }}" accept="image/*" required>
+                        @error('bukti_bayar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" form="formBayar" class="btn btn-primary">Bayar</button>
+            </div>
+        </div>
+    </div>
+</div>
+>>>>>>> customer
 
 @endsection
 
@@ -178,7 +231,11 @@
     $(document).on("click", ".bayar-modal", function () {
      var myBookId = $(this).data('id');
      $(".modal-body #id_transaksi").val( myBookId );
+<<<<<<< HEAD
      // As pointed out in comments,
+=======
+     // As pointed out in comments, 
+>>>>>>> customer
      // it is unnecessary to have to manually call the modal.
      // $('#addBookDialog').modal('show');
 });
@@ -189,12 +246,20 @@
         $('#bukti_bayar').change(function() {
             // Ambil file input
             var inputFile = this;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> customer
             // Cek apakah file telah dipilih
             if (inputFile.files && inputFile.files[0]) {
                 var fileSize = inputFile.files[0].size; // Ukuran file dalam byte
                 var maxSize = 2 * 1024 * 1024; // Maksimum 2 MB (sesuaikan dengan kebutuhan Anda)
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> customer
                 // Cek apakah ukuran file melebihi batas maksimum
                 if (fileSize > maxSize) {
                     alert('Ukuran gambar melebihi batas maksimum (2 MB).');
@@ -203,8 +268,11 @@
             }
         });
     });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> customer
 </script>
 
 @endsection
