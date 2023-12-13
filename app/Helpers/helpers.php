@@ -97,7 +97,13 @@ function sisa_waktu_bayar($dueDate)
     // Tampilkan sisa waktu
     return $remainingTime;
 }
-
+function limitWords($text, $limit = 30, $ellipsis = '...') {
+    $words = explode(' ', $text);
+    if (count($words) > $limit) {
+        $text = implode(' ', array_slice($words, 0, $limit)) . $ellipsis;
+    }
+    return $text;
+}
 function status_transaksi($status)
 {
 

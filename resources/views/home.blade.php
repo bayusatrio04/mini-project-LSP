@@ -201,7 +201,11 @@
                             <a href="?category={{ $item->id }}">
                                 <img src="{{ asset('/') }}{{ get_image_category($item->category_image) }}"
                                     class="card-img-top" alt="Event 1">
-                                <div class="overlay"></div>
+                                    @if($item->id == 1)
+                                    <div class="overlay"></div>
+                                    @elseif($item->id== 2)
+                                    <div class="overlay2"></div>
+                                    @endif
 
                                 <div class="card-text-overlay">
                                     <p class="text-center text-white fw-bold">{{ strtoupper($item->category_name) }}</p>

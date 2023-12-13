@@ -13,7 +13,7 @@
 
                         <div id="description_ticekt">
                             <h5>Deskripsi</h5>
-                            {{ $item->description }}
+                            {{ limitWords($item->description, 30) }}
                         </div>
 
                         <div class="card-body">
