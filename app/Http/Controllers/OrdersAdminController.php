@@ -31,11 +31,14 @@ class OrdersAdminController extends Controller
         return view('admin.orders.show', compact('transactions'));
     }
 
-    public function update(Request $request, Transaction $order)
+    public function update(Request $request, $id)
     {
 
         // dd($order);
-        $order->update(['status_transaction' => 3]);
+
+        $transaction = Transaction::find($id);
+
+        $transaction->update(['status_transaction' => 3]);
 
         return back()->with('success', 'Konfirmasi pembayaran berhasil!');
     }
