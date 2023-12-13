@@ -11,6 +11,8 @@ class OrdersAdminController extends Controller
     public function orders()
     {
 
+        //ada perubahan
+
         $data = [
 
             'transaksi' => Transaction::all()
