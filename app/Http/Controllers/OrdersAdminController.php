@@ -43,9 +43,17 @@ class OrdersAdminController extends Controller
     {
         $transaction = Transaction::find($id);
 
-        $transaction->update(['status_transaction' => 5]);
+        if (!$transaction) {
+            return back()->with('error', 'Transaksi tidak ditemukan.');
+        }
 
-        return back()->with('success', 'Konfirmasi Refund berhasil!');
+        try {
+            // Logika konfirmasi refund
+            $transaction->update(['status_transaction' => 5]);
+            return back()->with('success', 'Konfirmasi Refund berhasil!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal mengupdate status transaksi. Error: ' . $e->getMessage());
+        }
     }
     public function destroy($id)
     {

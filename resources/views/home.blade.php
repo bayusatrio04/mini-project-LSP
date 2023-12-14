@@ -139,17 +139,12 @@
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-                <a class="nav-link bg-primary text-white p-2 mt-3" href="#">Create New User</a>
+                <a class="nav-link bg-primary text-white p-2 mt-3" href="{{ route('customers.create') }}">Create New User</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link bg-primary text-white p-2 mt-3" href="#">Read All Users</a>
+                <a class="nav-link bg-primary text-white p-2 mt-3" href="{{ route('admin.customers') }}">Read All Users</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link bg-primary text-white p-2 mt-3" href="#">Update Users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-primary text-white p-2 mt-3" href="#">Delete Users</a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link bg-warning text-white p-2 mt-3" href="{{ route('admin.dashboards') }}">Dashboard
                     Admin</a>
