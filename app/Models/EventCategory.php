@@ -9,7 +9,19 @@ class EventCategory extends Model
 {
     use HasFactory;
 
-    protected $tabel = 'event_categories';
+    protected $table = 'event_categories';
 
     protected $guarded = [];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'id_event');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'id_category');
+    }
+
+
 }

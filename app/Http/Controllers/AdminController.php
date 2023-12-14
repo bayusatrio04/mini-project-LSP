@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function dashboards()
     {
-        $userCount = User::count();
+        $userCount = User::where('isadmin', 0)->count();
         $transactionCount = Transaction::count();
         $totalTransactionAmount = Transaction::sum('total_transaction');
 
@@ -35,10 +35,23 @@ class AdminController extends Controller
             'totalTransactionAmount' => $totalTransactionAmount,
         ]);
     }
-    public function orders()
+    public function orders(Request $request)
     {
-        $transaction = Transaction::all();
-        return view("admin.orders" ,   compact('transaction'));
+        $status = $request->input('status', null);
+
+        if ($status !== null) {
+            $transaction = Transaction::where('status_transaction', $status)->get();
+            $isEmpty = $transaction->isEmpty();
+        } else {
+            $transaction = Transaction::all();
+            $isEmpty = $transaction->isEmpty();
+        }
+
+        $groupedTransactions = $transaction->groupBy('status_transaction');
+        $transactionCount = Transaction::count();
+        return view("admin.orders" ,   compact('transaction', 'isEmpty') ,[
+            'transactionCount'=> $transactionCount,
+        ]);
     }
 
     public function products()
@@ -49,9 +62,9 @@ class AdminController extends Controller
 
     public function customers()
     {
-        $users = User::all();
+        $users = User::paginate(5);
+        $userCount = User::where('isadmin', 0)->count();
 
-
-        return view("admin.customers", compact('users'));
+        return view("admin.customers", compact('users', 'userCount'));
     }
 }

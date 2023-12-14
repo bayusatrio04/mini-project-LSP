@@ -3,17 +3,58 @@
 @section('title', 'Products')
 
 @section('content')
-<div class="d-flex justify-content-between mb-3">
-    <h2>List of Events</h2>
-    <a href="{{ route('events.create') }}" class="btn btn-primary">Create Event +</a>
+
+<div class="card">
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="my-4 mx-3">
+                <h1 class="h2 color-primary">Events</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboards') }}">Admin</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Events</li>
+                    </ol>
+                </nav>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="my-4 mx-3 col-xl-12 col-lg-6 col-md-12 col-12">
+                <div class="card">
+                   <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                         <div>
+                             <h4 class="mb-0 bad"><span class="badge bg-info">Events</span></h4>
+                         </div>
+                         <div class="icon-shape icon-md bg-light-primary text-info rounded-2">
+                             <i class="bi-journal-richtext"></i>
+                         </div>
+                      </div>
+                      <div class="align-center offset-md-4">
+                         <h5 class="fw-bold">{{ $eventsCount }}</h5>
+
+                      </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </div>
 
+<hr>
+<div class="d-flex mb-3">
+
+    <a href="{{ route('events.create') }}" class="btn btn-primary">Create Event +</a>
+</div>
 @if(count($events) > 0)
-    <table class="table caption-top">
-        <caption>List of Events</caption>
+    <table class="table caption-top table-striped table-hover table-bordered text-center">
+
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">#ID</th>
                 <th scope="col">Title</th>
 
                 <th scope="col">End Date</th>
@@ -33,12 +74,20 @@
 
                     <td>{{ 'Rp ' . number_format($event->ticket_price, 0, ',', '.') }}</td>
                     <td class="ms-3 mt-3">
-                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-info">Read</a>
-                        <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning">Update</a>
+                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-outline-info fs-5" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="View Details">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="{{ route('events.edit', $event->id) }}" class="btn btn-outline-warning fs-5" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Update Events">  <i class="bi bi-pencil-square"></i></a>
+
                         <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger ms-0">Delete</button>
+                            <button type="submit" class="btn btn-outline-danger ms-0"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Delete Events"
+                            ><i class="bi bi-trash"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -50,5 +99,12 @@
         No events found.
     </div>
 @endif
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 
+
+</script>
 @endsection

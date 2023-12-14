@@ -90,7 +90,7 @@
                     </td>
                     @elseif ($transactions->status_transaction == 2)
                     <td>Order Tiket Batal</td>
-                    </td>
+
                     @endif
                 </tr>
                 <tr>
@@ -109,7 +109,7 @@
                     <td>Konfirmasi Refund</td>
                     <td>:</td>
                     <td>
-                        <form action="{{ route('orders.update.refund', ['order' => $transactions->id]) }}"
+                        <form action="{{ route('orders.update.refund', $transactions->id) }}"
                             method="POST">
                             @csrf
                             @method('PUT')
@@ -120,6 +120,17 @@
                 </tr>
             </table>
         </div>
+        <div class="container">
+            <div class="pagination p12">
+              <ul>
+                <a href="#"><li>Previous</li></a>
+                <a href="#"><li>1</li></a>
+                <a href="#"><li>2</li></a>
+                <a class="is-active" href="#"><li>3</li></a>
+                <a href="#"><li>Next</li></a>
+              </ul>
+            </div>
+          </div>
     </div>
 
 

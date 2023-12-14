@@ -50,6 +50,10 @@
         }
 
 
+    .color-primary{
+        color: #F69413;
+    }
+
 
       </style>
     <!-- Custom styles for this template -->
@@ -104,82 +108,73 @@
         d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
     </symbol>
   </svg>
+
   <div class="container-fluid">
+    <section>
+        <style>
+            .menu-item {
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .menu-item.active {
+                background-color: #F69413;
+                padding: 10px;
+                border-radius: 5px;
+            }
+        </style>
+    </section>
     <div class="row">
+        <div class="col-md-3 col-lg-2">
+            <div class="d-flex flex-column p-5 my-5 rounded-4" style="min-height: 40rem; background: linear-gradient(to right, #485563, #29323c); positon:sticky !important;">
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('assets/images/Eventku Logo.png') }}" width="50" height="50" alt="" srcset="">
+                   <a href="{{ route('admin.dashboards') }}" class=" text-decoration-none ms-2 fw-bold" style="color: #F69413">Eventku</a>
+                </div>
+                <hr class="text-white">
 
-      <div class="col-md-3 col-lg-2 p-0 bg-body-tertiary">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
-          <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-            <img src="{{ asset('assets/images/Eventku Logo.png') }}" width="70" height="70" alt="" srcset="">
+                <div class="d-flex justify-content-start">
+                    <div class="d-flex flex-column">
+                        <div class="mb-3">
+                            <p class="mb-0 menu-item rounded-3
+                                {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                                <i class="bi bi-grid-fill" style="color: white; font-size:26px;"></i>
+                                <a href="{{ route('admin.dashboards') }}" class="text-decoration-none text-white ms-3">Dashboard</a>
+                            </p>
+                        </div>
 
-            <b class="fs-4 text-warning">Eventku</b>
-          </a>
-          <hr>
-          <ul class="nav nav-pills flex-column mb-auto">
+                        <div class="mb-3">
+                            <p class="mb-0 menu-item rounded-3
+                                {{ request()->is('admin/orders') ? 'active' : '' }}">
+                                <i class="bi bi-cart-plus" style="color: white; font-size:26px;"></i>
+                                <a href="{{ route('admin.orders') }}" class="text-decoration-none text-white ms-3">Orders</a>
+                            </p>
+                        </div>
 
-            <li>
-              <a href="{{ route('admin.dashboards') }}"
-                class="nav-link {{ request()->is('admin/dashboard') ? ' active bg-warning' : '' }}">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                  <use xlink:href="#speedometer2" />
-                </svg>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('admin.orders') }}"
-                class="nav-link {{ request()->is('admin/orders') ? ' active bg-warning' : '' }} link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                  <use xlink:href="#table" />
-                </svg>
-                Orders
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('admin.events') }}"
-                class="nav-link {{ request()->is('admin/events') ? ' active bg-warning' : '' }} link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                  <use xlink:href="#grid" />
-                </svg>
-                Events
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('admin.customers') }}"
-                class="nav-link {{ request()->is('admin/customers') ? ' active bg-warning' : '' }} link-body-emphasis">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                  <use xlink:href="#people-circle" />
-                </svg>
-                Customers
-              </a>
-            </li>
-          </ul>
-          <hr>
+                        <div class="mb-3">
+                            <p class="mb-0 menu-item rounded-3
+                                {{ request()->is('admin/events') ? 'active' : '' }}">
+                                <i class="bi bi-journal-richtext" style="color: white; font-size:26px;"></i>
+                                <a href="{{ route('admin.events') }}" class="text-decoration-none text-white ms-3">Events</a>
+                            </p>
+                        </div>
 
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>{{ Auth::user()->name }}</strong>
-            </a>
-            <ul class="dropdown-menu text-small shadow">
+                        <div class="mb-3">
+                            <p class="mb-0 menu-item rounded-3
+                                {{ request()->is('admin/customers') ? 'active' : '' }}">
+                                <i class="bi bi-people-fill" style="color: white; font-size:26px;"></i>
+                                <a href="{{ route('admin.customers') }}" class="text-decoration-none text-white ms-3">Users</a>
+                            </p>
+                        </div>
 
-              <li><a class="dropdown-item" href="{{ route('profil') }}">Profile</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <form id="logout-form" class="dropdown-item" action="{{ route('logout') }}" method="POST">
-                  @csrf
-                  <button type="submit" class="btn btn-link nav-link">Logout</button>
-                </form>
+                    </div>
+                </div>
 
-
-              </li>
-            </ul>
-          </div>
+            </div>
         </div>
-      </div>
+
       <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="container mt-5">
           @yield('content')

@@ -33,19 +33,17 @@ class OrdersAdminController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        // dd($order);
-
         $transaction = Transaction::find($id);
-
         $transaction->update(['status_transaction' => 3]);
 
         return back()->with('success', 'Konfirmasi pembayaran berhasil!');
     }
-    public function refund(Request $request, Transaction $order)
-    {
 
-        $order->update(['status_transaction' => 5]);
+    public function refund(Request $request,  $id)
+    {
+        $transaction = Transaction::find($id);
+
+        $transaction->update(['status_transaction' => 5]);
 
         return back()->with('success', 'Konfirmasi Refund berhasil!');
     }

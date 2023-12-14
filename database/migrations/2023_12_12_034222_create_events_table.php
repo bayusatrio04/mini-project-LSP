@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
 
             $table->string('category_events')->nullable();
-            $table->string('subCategory_events')->nullable();
+
 
             $table->dateTime('start_date');
             $table->dateTime('end_date');

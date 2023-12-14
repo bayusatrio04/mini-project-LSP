@@ -17,4 +17,5 @@ class Category extends Model
     {
         return $this->belongsToMany(Event::class, 'event_categories', 'id_category', 'id_event');
     }
+
 }

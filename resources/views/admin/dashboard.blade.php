@@ -8,91 +8,181 @@
 
 
 <main class="col-lg-10 px-md-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Dashboard</h1>
-    </div>
-    <div class="row">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <div class="card col-md-12">
+            <div class="row">
+                <div class="my-4 mx-3">
+                    <h1 class="h2 color-primary">Dashboard</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboards') }}">Admin</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+                </div>
 
-
-    </div>
-    <div class="row">
-        <!-- Total Customers Card -->
-        <div class="col-md-4">
-            <div class="card border-primary mb-3">
-                <div class="card-body text-primary">
-                    <h5 class="card-title">Total Customers</h5>
-                    <p class="card-text h2">{{ $userCount }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Pembelian Ticket Card -->
-        <div class="col-md-4">
-            <div class="card border-success mb-3">
-                <div class="card-body text-success">
-                    <h5 class="card-title">Total Pembelian Ticket</h5>
-                    <p class="card-text h2">{{ $transactionCount }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Rupiah Card -->
-        <div class="col-md-4">
-            <div class="card border-info mb-3">
-                <div class="card-body text-info">
-                    <h5 class="card-title">Total Rupiah</h5>
-                    <p class="card-text h2">{{  rupiah($totalTransactionAmount) }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Ticket Berhasil Card -->
-        <div class="col-md-6">
-            <div class="card border-success mb-3">
-                <div class="card-body text-success">
-                    <h5 class="card-title">Total Ticket Berhasil</h5>
-                    <p class="card-text h2">{{ $paidCount }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Gagal/Refund Ticket Card -->
-        <div class="col-md-6">
-            <div class="card border-danger mb-3">
-                <div class="card-body text-danger">
-                    <h5 class="card-title">Total Gagal/Refund Ticket</h5>
-                    <p class="card-text h2">{{ $refundProcessingCount }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-warning mb-3">
-                <div class="card-body text-warning">
-                    <h5 class="card-title">Total Transaksi Belum Bayar</h5>
-                    <p class="card-text h2">{{ $unpaidCount }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-success mb-3">
-                <div class="card-body text-success">
-                    <h5 class="card-title">Total Transaksi ter-Confirm</h5>
-                    <p class="card-text h2">{{ $paymentReceivedCount }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-info mb-3">
-                <div class="card-body text-info">
-                    <h5 class="card-title">Total Transaksi dibatalkan</h5>
-                    <p class="card-text h2">{{ $canceledCount }}</p>
-                </div>
             </div>
         </div>
     </div>
+    <hr>
+    <div class="row my-3">
+        <div class="col-lg-12 col-md-12 col-12">
+           <div>
+
+           </div>
+        </div>
+
+        <div class="mt-6 col-xl-3 col-lg-6 col-md-12 col-12">
+           <div class="card">
+              <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                       <h4 class="mb-0 bad"><span class="badge bg-danger">UnPaid</span></h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-danger rounded-2">
+                        <i class="bi bi-cart-x"></i>
+                    </div>
+                 </div>
+                 <div>
+                    <h1 class="fw-bold">{{ $unpaidCount }}</h1>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="mt-6 col-xl-3 col-lg-6 col-md-12 col-12">
+           <div class="card">
+              <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h4 class="mb-0 bad"><span class="badge bg-success">Paid</span></h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-success rounded-2">
+                        <i class="bi bi-bag-check"></i>
+                    </div>
+                 </div>
+                 <div>
+                    <h1 class="fw-bold">{{ $paidCount }}</h1>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="mt-6 col-xl-3 col-lg-6 col-md-12 col-12">
+           <div class="card">
+              <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h4 class="mb-0 bad"><span class="badge bg-warning">Cancel</span></h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-warning rounded-2">
+                        <i class="bi bi-x-square"></i>
+                    </div>
+                 </div>
+                 <div>
+                    <h1 class="fw-bold">{{ $canceledCount }}</h1>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="mt-6 col-xl-3 col-lg-6 col-md-12 col-12">
+           <div class="card">
+              <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h4 class="mb-0 bad"><span class="badge bg-info">Refund Process</span></h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-info rounded-2">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </div>
+                 </div>
+                 <div>
+                    <h1 class="fw-bold">{{ $refundProcessingCount }}</h1>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <div class="mt-3 col-xl-3 col-lg-6 col-md-12 col-12">
+           <div class="card">
+              <div class="card-body">
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h4 class="mb-0 bad"><span class="badge bg-success">Refund Success</span></h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-success rounded-2">
+                        <i class="bi bi-check-all"></i>
+                    </div>
+                 </div>
+                 <div>
+                    <h1 class="fw-bold">{{ $refundSuccessCount }}</h1>
+
+                 </div>
+              </div>
+           </div>
+        </div>
 
 
-  </main>
+
+
+        <div class="mt-3 col-xl-3 col-lg-6 col-md-12 col-12">
+            <div class="card">
+               <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                     <div>
+                         <h4 class="mb-0 bad"><span class="badge bg-info">Orders</span></h4>
+                     </div>
+                     <div class="icon-shape icon-md bg-light-primary text-info rounded-2">
+                         <i class="bi bi-cart-plus"></i>
+                     </div>
+                  </div>
+                  <div>
+                     <h1 class="fw-bold">{{ $transactionCount }}</h1>
+
+                  </div>
+               </div>
+            </div>
+        </div>
+        <div class="mt-3 col-xl-3 col-lg-6 col-md-12 col-12">
+            <div class="card">
+               <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                     <div>
+                         <h4 class="mb-0 bad"><span class="badge bg-primary">Customers</span></h4>
+                     </div>
+                     <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
+                         <i class="bi bi-people-fill"></i>
+                     </div>
+                  </div>
+                  <div>
+                     <h1 class="fw-bold">{{ $userCount }}</h1>
+
+                  </div>
+               </div>
+            </div>
+        </div>
+        <div class="mt-3 col-xl-3 col-lg-6 col-md-12 col-12">
+            <div class="card" style="height: 140px;">
+               <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                     <div>
+                         <h4 class="mb-0 bad"><span class="badge bg-warning">Amount</span></h4>
+                     </div>
+                     <div class="icon-shape icon-md bg-light-primary text-warning rounded-2">
+                         <i class="bi bi-people-fill"></i>
+                     </div>
+                  </div>
+                  <div>
+                     <h1 class="fs-2">{{ rupiah($totalTransactionAmount) }}</h1>
+
+                  </div>
+               </div>
+            </div>
+        </div>
+     </div>
+</main>
 
 
 

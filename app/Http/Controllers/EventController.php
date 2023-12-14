@@ -13,8 +13,9 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
+        $eventsCount = Event::count();
 
-        return view('admin.events', compact('events'));
+        return view('admin.events', compact('events', 'eventsCount'));
     }
     public function create()
     {
@@ -54,7 +55,8 @@ class EventController extends Controller
         ]);
 
         $event->save();
-        // $event->categories()->attach($request->input('category_events'));
+        $event->categories()->attach($request->input('category_events'));
+
 
         foreach ($request->input('category_events') as $item) {
 
@@ -66,6 +68,7 @@ class EventController extends Controller
 
             EventCategory::create($data);
         }
+
 
 
         return redirect()->route('admin.events')->with('success', 'Event created successfully.');
@@ -94,9 +97,9 @@ class EventController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'location' => 'required|string|max:255',
-            'ticket_price' => 'required',
-            'total_tickets' => 'required',
-            'image' => 'required',
+            'ticket_price' => 'required|numeric',
+            'total_tickets' => 'required|numeric',
+            'image' => 'nullable|image',
         ]);
 
         $event = Event::findOrFail($id);
@@ -114,30 +117,22 @@ class EventController extends Controller
 
         if ($request->hasFile('image')) {
 
-            if ($event->image_path) {
-                Storage::delete($event->image_path);
-            }
-
-
             $imagePath = $request->file('image')->store('events', 'public');
 
+            if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
+                Storage::disk('public')->delete($event->image_path);
+            }
 
-            $event->update(['image_path' => $imagePath]);
+            $event->image_path = $imagePath;
         }
-
 
         $event->save();
 
-        foreach ($request->input('category_events') as $item) {
 
+        $categoryIds = array_map('intval', $validatedData['category_events']);
 
-            $data = [
-                'id_event'  => $event->id,
-                'id_category' => $item
-            ];
+        $event->categories()->sync($categoryIds);
 
-            EventCategory::create($data);
-        }
 
         return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Event has been updated successfully.');
     }
