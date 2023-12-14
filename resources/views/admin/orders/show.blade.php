@@ -120,17 +120,7 @@
                 </tr>
             </table>
         </div>
-        <div class="container">
-            <div class="pagination p12">
-              <ul>
-                <a href="#"><li>Previous</li></a>
-                <a href="#"><li>1</li></a>
-                <a href="#"><li>2</li></a>
-                <a class="is-active" href="#"><li>3</li></a>
-                <a href="#"><li>Next</li></a>
-              </ul>
-            </div>
-          </div>
+
     </div>
 
 

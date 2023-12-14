@@ -10,12 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $events = Event::all();
         $eventsCount = Event::count();
+        $search = $request->input('search');
 
-        return view('admin.events', compact('events', 'eventsCount'));
+        $events = Event::when($search, function ($query, $search) {
+                return $query->where('title', 'LIKE', "%$search%")
+                             ->orWhere('description', 'LIKE', "%$search%")
+                             ->orWhere('location', 'LIKE', "%$search%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('admin.events', compact('events', 'eventsCount', 'search'));
     }
     public function create()
     {
@@ -103,18 +112,6 @@ class EventController extends Controller
         ]);
 
         $event = Event::findOrFail($id);
-
-        $event->title = $validatedData['title'];
-        $event->description = $validatedData['description'];
-        $event->category_events = $validatedData['category_events'];
-
-        $event->start_date = $validatedData['start_date'];
-        $event->end_date = $validatedData['end_date'];
-        $event->location = $validatedData['location'];
-        $event->ticket_price = $validatedData['ticket_price'];
-        $event->total_tickets = $validatedData['total_tickets'];
-
-
         if ($request->hasFile('image')) {
 
             $imagePath = $request->file('image')->store('events', 'public');
@@ -125,13 +122,33 @@ class EventController extends Controller
 
             $event->image_path = $imagePath;
         }
+        $event->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'category_events' => implode(',', $request->input('category_events')),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'location' => $request->input('location'),
+            'ticket_price' => $request->input('ticket_price'),
+            'total_tickets' => $request->input('total_tickets'),
 
-        $event->save();
+        ]);
 
+        $newCategoryEvents = $validatedData['category_events'];
+        $existingCategoryEvents = $event->categories()->pluck('categories.id')->all();
+        $categoriesToAdd = array_diff($newCategoryEvents, $existingCategoryEvents);
+        foreach ($categoriesToAdd as $categoryId) {
 
-        $categoryIds = array_map('intval', $validatedData['category_events']);
+            if (!EventCategory::where('id_event', $event->id)->where('id_category', $categoryId)->exists()) {
 
-        $event->categories()->sync($categoryIds);
+                EventCategory::create([
+                    'id_event' => $event->id,
+                    'id_category' => $categoryId,
+                ]);
+
+            }
+        }
+
 
 
         return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Event has been updated successfully.');

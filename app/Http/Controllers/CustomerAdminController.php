@@ -35,15 +35,16 @@ class CustomerAdminController extends Controller
             $imagePath = null;
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'ages' => $request->ages,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'user_picture' => $imagePath,
-        ]);
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->gender = $request->gender;
+        $user->ages = $request->ages;
+        $user->password = Hash::make($request->password);
+        $user->isadmin = $request->isadmin;
+        $user->user_picture = $imagePath;
 
+        $user->save();
         return redirect()->route('customers.show', $user->id)->with('success', 'Customer created successfully!');
     }
     public function show($id)

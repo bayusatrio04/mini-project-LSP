@@ -75,20 +75,16 @@
         </div>
     </div>
     <div class="row">
-
             <div class="col-md-"></div>
                 <div class="col-md-12">
-                    <div class="mt-3 mb-3">
+                    <div class="d-flex mb-3 mt-3">
 
-
-
-
-
+                        <a href="{{ route('customers.create') }}" class="btn btn-primary">Create Users +</a>
                     </div>
 
                     <div class="d-flex">
 
-                        <h1 class="">Daftar Pengguna</h1>
+                        <h1 class="fs-3">Daftar Pengguna</h1>
 
                     </div>
                     <table class="table table-bordered">

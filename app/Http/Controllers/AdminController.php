@@ -62,7 +62,7 @@ class AdminController extends Controller
 
     public function customers()
     {
-        $users = User::paginate(5);
+        $users = User::paginate(3);
         $userCount = User::where('isadmin', 0)->count();
 
         return view("admin.customers", compact('users', 'userCount'));

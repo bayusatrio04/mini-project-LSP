@@ -61,25 +61,28 @@ Route::prefix('riwayat_transaksi')->middleware('auth')->group(function () {
 Route::middleware(['web', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboards'])->name('admin.dashboards');
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
-
-
-
-
-
     Route::get('admin/events', [EventController::class, 'index'])->name('admin.events');
-
     Route::get('admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
+
+
+        // //orders
+        // Route::get('admin/orders/{id}', [OrdersAdminController::class, 'show'])->name('orders.show');
+        // Route::get('admin/orders/{id}/edit', [OrdersAdminController::class, 'edit'])->name('orders.edit');
+        Route::put('admin/orders/{order}', [OrdersAdminController::class, 'update'])->name('orders.update');
+        // Route::put('admin/orders/{order}', [OrdersAdminController::class, 'refund'])->name('orders.update.refund');
+        // Route::delete('admin/orders/{id}', [OrdersAdminController::class, 'destroy'])->name('orders.destroy');
+        // Route::get('admin/orders/{id}/print', [OrdersAdminController::class, 'print'])->name('orders.print');
+        // Route::get('admin/orders/{id}/download', [OrdersAdminController::class, 'download'])->name('orders.download');
+
+        // //endorders
+
+
 
     //orders
     Route::get('admin/orders/{id}', [OrdersAdminController::class, 'show'])->name('orders.show');
     Route::get('admin/orders/{id}/edit', [OrdersAdminController::class, 'edit'])->name('orders.edit');
-
-
-    Route::put('admin/orders/{id}', [OrdersAdminController::class, 'update'])->name('orders.update');
-
+    // Route::put('admin/orders/{id}', [OrdersAdminController::class, 'update'])->name('orders.update');
     Route::put('admin/orders/{id}', [OrdersAdminController::class, 'refund'])->name('orders.update.refund');
-
-
     Route::delete('admin/orders/{id}', [OrdersAdminController::class, 'destroy'])->name('orders.destroy');
     Route::get('admin/orders/{id}/print', [OrdersAdminController::class, 'print'])->name('orders.print');
     Route::get('admin/orders/{id}/download', [OrdersAdminController::class, 'download'])->name('orders.download');

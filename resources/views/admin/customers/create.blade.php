@@ -78,11 +78,6 @@
                 <div id="preview_img"
                 class="user-photo-container d-flex justify-content-center align-items-center mb-3">
 
-
-
-
-
-
                 <div class="form-group">
                     <label for="user_photo">
                         <img class="rounded-circle user_photo"
