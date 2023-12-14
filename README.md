@@ -20,4 +20,4 @@ Eventku - Platform Manajemen Acara / Konser
 
 
 ## f. Screen Recorder Demo Penjelasan Website yang Dibuat
-[Link ke Video Demo](path/to/demo_video.mp4)
+[Link ke Video Demo](https://drive.google.com/drive/folders/1hXg-9c0uTwujt_GzdYrzI2H-R65JKA7t?usp=sharing)
