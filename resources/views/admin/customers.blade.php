@@ -109,12 +109,12 @@
                                     <td>False (0)</td>
                                     @endif
                                     <td class="ms-3 mt-3">
-                                        <a href="{{ route('customers.show', $user->id) }}" class="btn btn-info">Read</a>
-                                        <a href="{{ route('customers.edit', $user->id) }}" class="btn btn-warning">Update</a>
+                                        <a href="{{ route('customers.show', $user->id) }}" class="btn btn-outline-info"><i class="bi bi-eye"></i></a>
+                                        <a href="{{ route('customers.edit', $user->id) }}" class="btn btn-outline-warning"> <i class="bi bi-pencil-square"></i></a>
                                         <form action="{{ route('customers.destroy', $user->id) }}" method="post" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete </button>
+                                            <button type="submit" class="btn btn-outline-danger"> <i class="bi bi-trash"></i> </button>
                                         </form>
                                     </td>
                                 </tr>

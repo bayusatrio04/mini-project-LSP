@@ -109,7 +109,7 @@
                     <td>Konfirmasi Refund</td>
                     <td>:</td>
                     <td>
-                        <form action="{{ route('orders.update.refund', ['order' => $transactions->id]) }}"
+                        <form action="{{  route('orders.update', $transactions->id)  }}"
                             method="POST">
                             @csrf
                             @method('PUT')

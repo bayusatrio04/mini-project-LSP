@@ -33,28 +33,28 @@ class OrdersAdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        $transaction = Transaction::find($id);
-        $transaction->update(['status_transaction' => 3]);
-
-        return back()->with('success', 'Konfirmasi pembayaran berhasil!');
-    }
-
-    public function refund(Request $request,  $id)
-    {
-        $transaction = Transaction::find($id);
-
-        if (!$transaction) {
-            return back()->with('error', 'Transaksi tidak ditemukan.');
-        }
 
         try {
-            // Logika konfirmasi refund
-            $transaction->update(['status_transaction' => 5]);
-            return back()->with('success', 'Konfirmasi Refund berhasil!');
+            $transaction = Transaction::findOrFail($id);
+
+            // Update status transaksi
+            if ($transaction->status_transaction == 1) {
+                // Ubah status transaksi menjadi "Dibayar"
+                $transaction->update(['status_transaction' => 3]);
+            }
+            if ($transaction->status_transaction == 4) {
+                // Ubah status transaksi menjadi "Refund"
+                $transaction->update(['status_transaction' => 5]);
+            }
+
+            return back()->with('success', 'Update berhasil!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Gagal mengupdate status transaksi. Error: ' . $e->getMessage());
+            return back()->with('error', 'Gagal mengupdate transaksi. Error: ' . $e->getMessage());
         }
     }
+
+
+
     public function destroy($id)
     {
         $order = Transaction::findOrFail($id);

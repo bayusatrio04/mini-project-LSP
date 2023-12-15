@@ -54,5 +54,9 @@ class User extends Authenticatable
     {
         return $this->attributes['isAdmin'] == true;
     }
+    public function event()
+{
+    return $this->belongsTo(Event::class, 'id_event');
+}
 
 }
