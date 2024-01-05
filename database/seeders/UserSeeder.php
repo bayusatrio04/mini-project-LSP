@@ -24,6 +24,11 @@ class UserSeeder extends Seeder
                 'isAdmin' => 0,
                 'gender' => 1, //0 male 1 female
                 'ages' => 22,
+                'no_telp'=> 814841,
+                'alamat_lengkap' =>'Jambuuy',
+                'id_provinsi' => 1,
+                'id_kabupaten_kota'=>1,
+                'id_agama'=>1,
                 // 'isAdmin' => 0,
 
             ],
@@ -34,6 +39,11 @@ class UserSeeder extends Seeder
                 'isAdmin' => 0,
                 'gender' => 0, //0 male 1 female
                 'ages' => 18,
+                'no_telp'=> 814841,
+                'alamat_lengkap' =>'Jambuuy',
+                'id_provinsi' => 1,
+                'id_kabupaten_kota'=>1,
+                'id_agama'=>1,
             ],
             [
                 'name' => 'Admin',
@@ -42,6 +52,11 @@ class UserSeeder extends Seeder
                 'isAdmin' => 1,
                 'gender' => 1, //0 male 1 female
                 'ages' => 21,
+                'no_telp'=> 814841,
+                'alamat_lengkap' =>'Jambuuy',
+                'id_provinsi' => 1,
+                'id_kabupaten_kota'=>1,
+                'id_agama'=>1,
             ],
         ]);
 

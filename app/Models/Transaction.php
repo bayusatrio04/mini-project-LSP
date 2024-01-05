@@ -11,7 +11,7 @@ class Transaction extends Model
     protected $table = 'transactions';
     protected $guarded = [];
 // Model Transaction
-    protected $fillable = ['status_transaction'];
+
 
     public static function get_transaksi_belum_bayar()
     {

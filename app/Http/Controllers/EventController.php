@@ -44,6 +44,7 @@ class EventController extends Controller
             'ticket_price' => 'required',
             'total_tickets' => 'required',
             'image' => 'required',
+            'video' => 'required',
 
 
         ]);
@@ -51,6 +52,8 @@ class EventController extends Controller
 
         $imagePath = $request->file('image')->store('events_img', 'public');
 
+        $videoName = time().'.'.$request->video->extension();
+        $path = $request->file('video')->storeAs('video', $videoName, 'public');
         $event = new Event([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -61,6 +64,7 @@ class EventController extends Controller
             'ticket_price' => $request->input('ticket_price'),
             'total_tickets' => $request->input('total_tickets'),
             'image_path' => $imagePath,
+            'video' => $path,
         ]);
 
         $event->save();

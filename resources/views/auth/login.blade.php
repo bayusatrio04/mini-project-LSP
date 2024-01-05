@@ -10,17 +10,17 @@
                     <div class="card-header">Login</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('login') }}" onsubmit="return validateForm()">
                             @csrf
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">E-Mail Address</label>
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus>
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control" name="password"  autocomplete="current-password">
                             </div>
 
                             <div class="mb-3">
@@ -42,3 +42,20 @@
         </div>
     </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+        function validateForm() {
+        var PasswordInput = document.getElementById('password').value;
+        var EmailInput = document.getElementById('email').value;
+
+        if (PasswordInput.trim() === '') {
+            alert('Field password Tidak boleh kosong!');
+            return false;
+        }else if(EmailInput.trim() === '' || EmailInput.trim() === '@'){
+            alert('Field Email Tidak boleh kosong!');
+            return false;
+        }
+
+        return true;
+    }
+</script>

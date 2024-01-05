@@ -11,30 +11,40 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CustomerAdminController;
 use App\Http\Controllers\OrdersAdminController;
 
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-//Untuk Search
-Route::get('/users/search', [HomeController::class, 'search'])->name('users.search');
 
 
 //Untuk Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+//Untuk Login
+
 
 //Untuk Register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'create'])->name('create.account');
+//Untuk Register
 
 //profil customer
 Route::prefix('profil')->group(function () {
-    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+
     Route::get('/', [CustomerController::class, 'profil'])->name('profil');
     Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
 });
 
+//Untuk Search
+Route::get('/users/search', [HomeController::class, 'search'])->name('users.search');
+
+
+
+
 Route::prefix('pemesanan')->middleware('auth')->group(function () {
-    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+
     Route::get('{id}', [PemesananController::class, 'index'])->name('pemesanan');
     Route::post('beli_tiket/{id}', [PemesananController::class, 'beli_tiket'])->name('pemesanan.beli_tiket');
 
@@ -43,15 +53,16 @@ Route::prefix('pemesanan')->middleware('auth')->group(function () {
     // Route::post('update/{id}', [CustomerController::class, 'update_profil'])->name('profil.update');
 });
 
+
 Route::prefix('pembayaran')->middleware('auth')->group(function () {
-    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+
     Route::get('/', [PemesananController::class, 'pembayaran'])->name('pembayaran');
     Route::post('bayar_tiket', [PemesananController::class, 'bayar_tiket'])->name('pembayaran.bayar_tiket');
     Route::get('refund/{id}', [PemesananController::class, 'refund'])->name('pembayaran.refund');
 });
 
 Route::prefix('riwayat_transaksi')->middleware('auth')->group(function () {
-    // Semua rute dalam grup ini akan memiliki awalan 'admin'
+
     Route::get('/', [PemesananController::class, 'riwayat_transaksi'])->name('riwayat_transaksi');
     // Route::post('bayar_tiket', [PemesananController::class, 'bayar_tiket'])->name('pembayaran.bayar_tiket');
 });

@@ -70,10 +70,14 @@
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 @if ($event->image_path)
-                <img src="{{ asset('storage/' . $event->image_path) }}" alt="Current Image">
+                <img src="{{ asset('storage/' . $event->image_path) }}" width="300" height="300" alt="Current Image">
              @endif
              <input type="file" class="form-control" id="image" name="image" value="{{ $event->image_path }}">
 
+            </div>
+            <div class="mb-3">
+                <label for="video" class="form-label">Choose Video:</label>
+                <input type="file" name="video" class="form-control" id="video" value="{{ $event->image_path }}">
             </div>
 
             <button type="submit" class="btn btn-primary">Update Event</button>

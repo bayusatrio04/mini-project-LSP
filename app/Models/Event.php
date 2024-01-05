@@ -12,6 +12,8 @@ class Event extends Model
 
 
     protected $guarded = [];
+        protected $fillable=['title','video', 'description', 'category_events', 'start_date', 'end_date', 'location', 'ticket_price',
+        'sold_tickets', 'image_path', 'total_tickets'];
 
     public function categories()
     {

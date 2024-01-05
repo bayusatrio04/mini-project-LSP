@@ -69,6 +69,11 @@
         <input type="file" class="form-control" id="image" name="image">
     </div>
 
+    <div class="mb-3">
+        <label for="video" class="form-label">Choose Video:</label>
+        <input type="file" name="video" class="form-control" id="video">
+    </div>
+
     <button type="submit" class="btn btn-primary">Create Event</button>
 </form>
 

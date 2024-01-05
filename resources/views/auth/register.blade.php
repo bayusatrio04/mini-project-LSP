@@ -59,12 +59,6 @@
 
                     <div id="preview_img"
                         class="user-photo-container d-flex justify-content-center align-items-center mb-3">
-
-
-
-
-
-
                         <div class="form-group">
                             <label for="user_photo">
                                 <img class="rounded-circle user_photo"
@@ -79,9 +73,6 @@
                                 onchange="displayImage(this)" class="form-control">
 
                         </div>
-
-
-
                     </div>
 
                     @error('user_photo')
@@ -147,6 +138,11 @@
                         </span>
                         @enderror
                     </div>
+                    <!-- No. Telepon -->
+                    <div class="form-group">
+                        <label for="no_telepon">No. Telepon:</label>
+                        <input type="tel" class="form-control" id="no_telepon" name="no_telepon" required >
+                    </div>
 
                     <div class="form-group mb-3">
                         <label for="password">Password</label>
@@ -165,6 +161,50 @@
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                             required autocomplete="new-password">
                     </div>
+                    <!-- Alamat Lengkap Saat Ini -->
+                    <div class="form-group">
+                        <label for="alamat_lengkap">Alamat Lengkap Saat Ini:</label>
+                        <textarea class="form-control" id="alamat_lengkap" name="alamat_lengkap" placeholder="Jl. Maulana Hasanudin Gg...." required></textarea>
+                    </div>
+                    <div class="row">
+                        <!-- Propinsi -->
+                        <div class="form-group col-md-6">
+                            <label for="provinsi">Provinsi:</label>
+                            <select name="id_provinsi" id="provinsi" class="form-control">
+                                <option value="">===Choose==</option>
+                                @forelse ($provinsi as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+
+                        <!-- Kota -->
+                        <div class="form-group col-md-6">
+                            <label for="kabupaten_kota">Kabupaten atau Kota:</label>
+                            <select name="id_kabupaten_kota" id="kabupaten_kota" class="form-control">
+                                <option value="">===Choose==</option>
+                                @forelse ($kabupaten_kota as $item)
+                                    <option class="kota-option" data-provinsi="{{ $item->id_provinsi }}" value="{{ $item->id }}">{{ $item->name }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Agama -->
+                    <div class="form-group">
+                        <label for="agama">Agama:</label>
+                        <select name="id_agama" id="agama" class="form-control">
+                            <option value="">===Choose Religion==</option>
+                            @forelse ($agama as  $item){
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            }
+
+                            @empty
+
+                            @endforelse   ()
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="account">Sudah Punya Account? <a href="{{ route('login') }}"> Login Here</a></label>
                     </div>
@@ -178,6 +218,7 @@
 @endsection
 
 @section('addScript')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
     // Fungsi untuk menampilkan gambar yang dipilih di elemen img
@@ -197,6 +238,32 @@
       reader.readAsDataURL(input.files[0]);
     }
   }
+  $(document).ready(function(){
+
+$('#no_telepon').on('input', function() {
+    var inputVal = $(this).val();
+    var cleanedVal = inputVal.replace(/\D/g, '');
+
+
+    if (inputVal !== cleanedVal) {
+        alert('No Telepon Harus Angka !');
+    }
+
+    $(this).val(cleanedVal);
+});
+});
+
+  $(document).ready(function(){
+        $('#provinsi').change(function(){
+            var selectedProvinsi = $(this).val();
+
+
+            $('#kabupaten_kota option').hide();
+            $('.kota-option[data-provinsi="' + selectedProvinsi + '"]').show();
+        });
+    });
+
+
 </script>
 
 @endsection

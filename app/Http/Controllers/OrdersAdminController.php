@@ -37,13 +37,12 @@ class OrdersAdminController extends Controller
         try {
             $transaction = Transaction::findOrFail($id);
 
-            // Update status transaksi
+            //Kalo == 1 Ubah status transaksi menjadi "Dibayar"
             if ($transaction->status_transaction == 1) {
-                // Ubah status transaksi menjadi "Dibayar"
                 $transaction->update(['status_transaction' => 3]);
             }
+            // Kalo == 4 Ubah status transaksi menjadi "Refund"
             if ($transaction->status_transaction == 4) {
-                // Ubah status transaksi menjadi "Refund"
                 $transaction->update(['status_transaction' => 5]);
             }
 

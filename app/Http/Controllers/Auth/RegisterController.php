@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Provinsi;
 
+use App\Models\KabupatenKota;
+use App\Models\Agama;
 class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        $agama = Agama::all();
+        $provinsi = Provinsi::all();
+        $kabupaten_kota = KabupatenKota::all();
+        return view('auth.register', compact('agama', 'provinsi','kabupaten_kota'));
     }
     protected function create(Request $request)
     {
@@ -20,6 +26,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'age' => ['required', 'numeric', 'min:10', 'max:100'],
             'gender' => ['required', 'max:255'],
+            'no_telepon' => 'required|numeric',
             'user_photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -37,7 +44,7 @@ class RegisterController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $imagePath = $image->storeAs('user_photos', $imageName, 'public');
         } else {
-            $imagePath = null; // Set a default value or handle the case where no image is provided
+            $imagePath = null; //
         }
 
         $user = User::create([
@@ -45,6 +52,11 @@ class RegisterController extends Controller
             'ages' => $request->age,
             'gender' => $request->gender,
             'email' => $request->email,
+            'no_telp' => $request->no_telepon,
+            'alamat_lengkap' => $request->alamat_lengkap,
+            'id_provinsi' => $request->id_provinsi,
+            'id_kabupaten_kota' => $request->id_kabupaten_kota,
+            'id_agama' => $request->id_agama,
             'password' => Hash::make($request->password),
             'user_picture' => $imagePath,
         ]);

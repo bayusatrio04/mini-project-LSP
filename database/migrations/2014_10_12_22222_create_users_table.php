@@ -18,13 +18,21 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('gender')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->text('alamat_lengkap');
+            $table->unsignedBigInteger('id_provinsi');
+            $table->unsignedBigInteger('id_kabupaten_kota');
+            $table->unsignedBigInteger('id_agama');
             $table->integer('ages')->nullable();
-            $table->string('image_path')->nullable();
             $table->boolean('isAdmin')->default(false);
 
             $table->text('user_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('id_provinsi')->references('id')->on('provinsi');
+            $table->foreign('id_kabupaten_kota')->references('id')->on('kabupaten_kota');
+            $table->foreign('id_agama')->references('id')->on('agama');
         });
     }
 

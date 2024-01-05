@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('total_tickets');
             $table->integer('sold_tickets')->default(0);
             $table->string('image_path')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
         });
     }

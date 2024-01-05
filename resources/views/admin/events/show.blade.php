@@ -8,7 +8,11 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card mb-3">
-                    <img src="{{ asset('storage/' . $event->image_path) }}" class="card-img-top" alt="{{ $event->title }}">
+                    <img src="{{ asset('storage/' . $event->image_path) }}" class="card-img-top mb-3" alt="{{ $event->title }}">
+                    <h3>VideoFiller</h3>
+                    <video width="100%" height="240" controls>
+                        <source src="{{ asset('storage/' . $event->video) }}" type="video/mp4">
+                    </video>
                     <div class="card-body">
                         <h5 class="card-title">{{ $event->title }}</h5>
                         <p class="card-text">{{ $event->description }}</p>
